@@ -1,3 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <text y="26" font-size="28">🖥️</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <rect width="32" height="32" fill="#ffffff"/>
+  <!-- 8×8 pixel "G" — 4px cells -->
+  <g fill="#000000">
+    <rect x="4" y="0" width="24" height="4"/>
+    <rect x="0" y="4" width="4" height="4"/>
+    <rect x="28" y="4" width="4" height="4"/>
+    <rect x="0" y="8" width="4" height="4"/>
+    <rect x="0" y="12" width="4" height="4"/>
+    <rect x="16" y="12" width="16" height="4"/>
+    <rect x="0" y="16" width="4" height="4"/>
+    <rect x="28" y="16" width="4" height="4"/>
+    <rect x="0" y="20" width="4" height="4"/>
+    <rect x="28" y="20" width="4" height="4"/>
+    <rect x="0" y="24" width="4" height="4"/>
+    <rect x="28" y="24" width="4" height="4"/>
+    <rect x="4" y="28" width="24" height="4"/>
+  </g>
 </svg>
