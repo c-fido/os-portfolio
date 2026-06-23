@@ -6,6 +6,7 @@ export const person = {
   name: "Giancarlo Fedolfi",
   title: "CS & German Student · Wesleyan University",
   location: "Connecticut",
+  phone: "+1 (860) 967-6556",
   email: "fedolficarlo@gmail.com",
   github: "https://github.com/c-fido",
   linkedin: "https://www.linkedin.com/in/giancarlo-fedolfi-652026306/",
@@ -43,8 +44,7 @@ fedolficarlo@gmail.com`;
 
 export const skills = {
   languages: ["Python", "C++", "C", "JavaScript", "SQL", "PHP", "C#", "SMLNJ", "GDScript"],
-  frameworks: ["React", "React Native", "Django", "Node.js", "MongoDB", "BeautifulSoup", "LiteLLM"],
-  tools: ["Git", "Figma", "JIRA", "PostgreSQL", "OpenAI API", "Google Search API", "Microsoft Office"],
+  frameworks: ["React", "Django", "Node.js", "Git", "MongoDB", "Figma", "LiteLLM", "BeautifulSoup", "JIRA", "Microsoft Office"],
 };
 
 export const projects = [
@@ -105,6 +105,7 @@ export const projects = [
 ];
 
 export const resume = {
+  pdfUrl: "/resume.pdf",
   experience: [
     {
       role: "Software Engineer Intern",
@@ -112,42 +113,80 @@ export const resume = {
       location: "Hamburg, Germany",
       period: "Sep. 2025 – Dec. 2025",
       bullets: [
-        "Designed and built a web-based vulnerability database using Python and the OpenAI API, improving classification accuracy and reducing manual research time by 85%.",
-        "Integrated automated data retrieval via Google Search API to enhance coverage and reliability of records.",
-        "Collaborated cross-functionally with engineers and designers to prototype and refine UI components in Figma.",
+        "Built a web-based CVE classification system in Python using LiteLLM to route Anthropic API calls, cutting manual research time by 85%.",
+        "Automated data ingestion by integrating the Brave Search API with BeautifulSoup scraping.",
+        "Designed and iterated on UI/UX mockups in Figma with engineers and product managers to make the tool usable by non-technical reviewers.",
       ],
     },
   ],
   research: [
     {
       role: "Research Assistant",
-      company: "Bioinformatics Research · Wesleyan University",
+      company: "Bioinformatics Research · Wesleyan University — Prof. Cohan, Prof. Krizanc",
       location: "Middletown, CT",
-      period: "Jan. 2026 – Present",
+      period: "Feb. 2026 – Present",
       bullets: [
-        "Analyzed genome sequencing data to identify and separate species-level genomes using Python with Pandas.",
-        "Built a pipeline to gather data from the web, feeding it into Bakta then Roary to produce gene presence/absence trees — improving previous efficiency by 50%.",
-        "Visualized data with Matplotlib for gene presence/absence trees.",
+        "Analyzed genome sequencing data to separate species-level genomes using Python and Pandas.",
+        "Built a pipeline to gather data from the web, feeding it into Bakta, Roary, Veryfasttree, then Ecosim to get gene presence/absence trees, replacing a manual process and cutting runtime by half.",
+        "Visualized gene presence/absence trees with Matplotlib.",
       ],
     },
     {
       role: "Research Assistant",
-      company: "Metal Manufacturing Research · Wesleyan University",
+      company: "Additive Manufacturing Research · Wesleyan University — Prof. Chang-Davidson",
       location: "Middletown, CT",
-      period: "June. 2026 – Present",
+      period: "June 2026 – Present",
       bullets: [
-        "Worked with graph theory to simulate heat dispersion for geometries",
-        "Wrote a python script to analyze the data using Matplotlib, Numpy, and Pandas to compare the simulation to the real data",
-        "Learned how to operate a welding robot using RAPID and RobotStudio.",
+        "Developed a model using graph theory to simulate heat dispersion in a DED metal print.",
+        "Simulated and printed different geometries to test accuracy and calibrate the software.",
       ],
-    }
+    },
+  ],
+  projects: [
+    {
+      title: "Sports Warehouse",
+      tags: "React Native, PHP, PostgreSQL, MongoDB",
+      period: "May 2025",
+      bullets: [
+        "Built a full-stack Android app with React Native (Expo), a PHP backend, MongoDB for product data, and PostgreSQL for inventory queries, as part of a 3-person team.",
+        "Added inventory and order management features with full CRUD support.",
+      ],
+    },
+    {
+      title: "TermiTama",
+      tags: "C++17, CMake, FTXUI, JSON",
+      period: "Apr. 2026",
+      bullets: [
+        "Built a terminal virtual pet game in C++17 using FTXUI with an FSM-driven lifecycle (Baby → Adult), four stat systems with offline time-delta decay capped at 12 hours, and a genetics engine with heritable stat caps and ±10% random mutation across breeding generations.",
+        "Implemented a persistent save system using JSON serialization that auto-saves after every action, restores full game state on launch, and supports a Pet Box of up to 6 simultaneously active pets with free switching and adoption.",
+      ],
+    },
+    {
+      title: "Typing Trainer",
+      tags: "C++, SM-2 Algorithm, Sockets",
+      period: "May 2026",
+      bullets: [
+        "Implemented the SM-2 spaced repetition algorithm for adaptive bigram-difficulty scheduling; added local networked multiplayer, ghost-race replay, and per-session WPM/accuracy CSV logging in a custom terminal UI.",
+        "Adapts to the user depending on what words and letters they make mistakes on, allowing for customized improvement for individual users.",
+      ],
+    },
+    {
+      title: "Remindr",
+      tags: "C++, Swift",
+      period: "May 2026",
+      bullets: [
+        "Built a cross-platform (macOS/Linux) desktop notification scheduler with a daemon/CLI split architecture, Unix domain socket IPC, natural language time parsing, and recurrence scheduling.",
+        "Swift helper for native macOS UNUserNotificationCenter notifications; persistent JSON reminder store via nlohmann/json.",
+      ],
+    },
   ],
   education: [
     {
-      degree: "B.A. in Computer Science, German Studies",
+      degree: "B.A. in Computer Science, German",
       school: "Wesleyan University · Middletown, CT",
       period: "Expected May 2027",
-      details: "GPA: 3.74 · Dean's List · Scholar-Athlete Honors Award · Varsity Track Captain",
+      details: "GPA: 3.74/4.0 · Dean's List · Scholar-Athlete Honors Award · Varsity Indoor and Outdoor Track and Field Captain",
+      coursework: "Software Engineering, Automata Theory, Discrete Mathematics, Logic & Functional Programming, Computational Media (Game Development), Data Structures",
     },
   ],
 };
