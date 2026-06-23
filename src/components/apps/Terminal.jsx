@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { person, skills, projects } from '../../data/portfolio';
 
 const PROMPT = `C:\\PORTFOLIO>`;
+const TERM_FONT = '11px';
 
 const COMMANDS = {
   help: () => `
@@ -91,6 +92,10 @@ export default function Terminal() {
       type: 'system',
       text: `Microsoft(R) Portfolio OS  Version 1.00\nCopyright (C) ${person.name}. All rights reserved.\n`,
     },
+    {
+      type: 'system',
+      text: 'Type help to see all commands!',
+    },
   ]);
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState([]);
@@ -148,7 +153,7 @@ export default function Terminal() {
         flexDirection: 'column',
         background: '#000000',
         fontFamily: '"Press Start 2P", monospace',
-        fontSize: '8px',
+        fontSize: TERM_FONT,
         cursor: 'text',
         color: '#c0c0c0',
       }}
@@ -170,7 +175,9 @@ export default function Terminal() {
               <pre style={{
                 whiteSpace: 'pre-wrap',
                 lineHeight: 1.9,
-                color: entry.type === 'system' ? '#808080' : '#c0c0c0',
+                color: entry.type === 'system' && entry.text.startsWith('Type help')
+                  ? '#00ff00'
+                  : entry.type === 'system' ? '#808080' : '#c0c0c0',
                 margin: '0 0 4px',
               }}>
                 {entry.text}
@@ -190,7 +197,7 @@ export default function Terminal() {
         borderTop: '1px solid #404040',
         background: '#000000',
       }}>
-        <span style={{ color: '#c0c0c0', flexShrink: 0, fontFamily: '"Press Start 2P", monospace', fontSize: '8px' }}>
+        <span style={{ color: '#c0c0c0', flexShrink: 0, fontFamily: '"Press Start 2P", monospace', fontSize: TERM_FONT }}>
           {PROMPT}
         </span>
         <input
@@ -205,7 +212,7 @@ export default function Terminal() {
             outline: 'none',
             color: '#ffffff',
             fontFamily: '"Press Start 2P", monospace',
-            fontSize: '8px',
+            fontSize: TERM_FONT,
             caret: 'block',
             caretColor: '#c0c0c0',
           }}
@@ -215,7 +222,7 @@ export default function Terminal() {
           autoComplete="off"
           autoCorrect="off"
         />
-        <span className="terminal-cursor" style={{ color: '#c0c0c0', fontFamily: '"Press Start 2P", monospace', fontSize: '8px' }}>█</span>
+        <span className="terminal-cursor" style={{ color: '#c0c0c0', fontFamily: '"Press Start 2P", monospace', fontSize: TERM_FONT }}>█</span>
       </div>
     </div>
   );
