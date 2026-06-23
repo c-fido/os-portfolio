@@ -19,31 +19,25 @@ const BOOT_TIPS = [
 
 export default function BootScreen({ onComplete }) {
   const [stage, setStage] = useState(0);
-  const [done, setDone] = useState(false);
   const [tip] = useState(() => BOOT_TIPS[Math.floor(Math.random() * BOOT_TIPS.length)]);
 
   useEffect(() => {
-    let timeout;
+    const timeouts = [];
     function advance(i) {
       if (i >= STAGES.length) {
-        timeout = setTimeout(() => {
-          setDone(true);
-          setTimeout(onComplete, 400);
-        }, 600);
+        timeouts.push(setTimeout(onComplete, 400));
         return;
       }
-      timeout = setTimeout(() => {
+      timeouts.push(setTimeout(() => {
         setStage(i);
         advance(i + 1);
-      }, STAGES[i].delay);
+      }, STAGES[i].delay));
     }
     advance(0);
-    return () => clearTimeout(timeout);
+    return () => timeouts.forEach(clearTimeout);
   }, [onComplete]);
 
   const current = STAGES[Math.min(stage, STAGES.length - 1)];
-
-  if (done) return null;
 
   return (
     <div style={{
