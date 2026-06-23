@@ -1,0 +1,767 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Win95 Design Token Variables ──────────────────────────────────── */
+:root {
+  --color-desktop:        #008080;
+  --color-desktop-light:  #009a9a;
+  --color-surface:        #c0c0c0;
+  --color-text:           #000000;
+  --color-text-disabled:  #808080;
+  --color-text-inverted:  #ffffff;
+  --color-title-active:   #000080;
+  --color-title-inactive: #808080;
+  --color-title-text:     #ffffff;
+  --color-highlight:      #000080;
+  --color-highlight-text: #ffffff;
+  --color-border-light:   #ffffff;
+  --color-border-dark:    #808080;
+  --color-border-darker:  #000000;
+  --color-scrollbar:      #c0c0c0;
+  --font-pixel: "Press Start 2P", "MS Sans Serif", monospace;
+  --font-sys:   Tahoma, "MS Sans Serif", "Segoe UI", Arial, sans-serif;
+  --font-mono:  "Courier New", Courier, monospace;
+  --text-sm:    11px;
+  --text-xs:    10px;
+  --text-lg:    13px;
+  --leading:    1.45;
+}
+
+/* ── Global Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+  background: var(--color-desktop);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Typography utilities ───────────────────────────────────────────── */
+.font-pixel {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  line-height: 1.5;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+.font-sys {
+  font-family: var(--font-sys);
+}
+
+.text-prose {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* ── App shell — readable body, pixel chrome ────────────────────────── */
+.win95-app {
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+}
+
+.win95-app-toolbar {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.win95-app-toolbar button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.win95-content {
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* ── Desktop wallpaper ──────────────────────────────────────────────── */
+.desktop-wallpaper {
+  background-color: var(--color-desktop);
+  background-image:
+    radial-gradient(ellipse 120px 80px at 15% 20%, rgba(255,255,255,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 160px 100px at 75% 15%, rgba(255,255,255,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 100px 70px at 85% 60%, rgba(255,255,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 140px 90px at 30% 75%, rgba(255,255,255,0.09) 0%, transparent 70%),
+    linear-gradient(160deg, var(--color-desktop-light) 0%, var(--color-desktop) 45%, #006868 100%);
+}
+
+/* ── Pixel rendering for icons & games ──────────────────────────────── */
+img, canvas, svg {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ── Win95 3-D Border Utilities ─────────────────────────────────────── */
+.win95-raised {
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+}
+
+.win95-pressed {
+  box-shadow:
+    inset  1px  1px 0 #000000,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #808080,
+    inset -2px -2px 0 #dfdfdf;
+}
+
+.win95-inset {
+  box-shadow:
+    inset  1px  1px 0 #808080,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #000000,
+    inset -2px -2px 0 #dfdfdf;
+}
+
+.win95-inset-sm {
+  box-shadow:
+    inset  1px  1px 0 #808080,
+    inset -1px -1px 0 #ffffff;
+}
+
+/* ── Win95 Button ───────────────────────────────────────────────────── */
+.win95-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sys);
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  cursor: default;
+  border: none;
+  padding: 4px 14px 5px;
+  min-width: 75px;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+}
+
+.win95-btn:active,
+.win95-btn.active {
+  box-shadow:
+    inset  1px  1px 0 #000000,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #808080,
+    inset -2px -2px 0 #dfdfdf;
+  padding: 5px 13px 4px 15px;
+}
+
+.win95-btn:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+/* ── Win95 Input / Textarea ─────────────────────────────────────────── */
+.win95-input {
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+  border: none;
+  padding: 3px 6px;
+  overflow-wrap: break-word;
+  word-break: normal;
+  box-shadow:
+    inset  1px  1px 0 #808080,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #000000,
+    inset -2px -2px 0 #dfdfdf;
+}
+
+.win95-input:focus {
+  outline: none;
+}
+
+/* ── Win95 Scrollbar ────────────────────────────────────────────────── */
+.os-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: #c0c0c0 #c0c0c0;
+}
+
+.os-scrollbar::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.os-scrollbar::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff;
+}
+
+.os-scrollbar::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+}
+
+.os-scrollbar::-webkit-scrollbar-button {
+  background: #c0c0c0;
+  display: block;
+  height: 16px;
+  width: 16px;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+}
+
+/* ── Window Drag ────────────────────────────────────────────────────── */
+.window-titlebar {
+  cursor: default;
+}
+
+.dragging * {
+  user-select: none !important;
+  pointer-events: none;
+}
+
+/* ── Window Open Animation ──────────────────────────────────────────── */
+.window-enter {
+  animation: win95-appear 0.12s ease-out;
+}
+
+@keyframes win95-appear {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Terminal Cursor ────────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Boot Screen Progress ───────────────────────────────────────────── */
+@keyframes boot-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ── Mobile Tab Scrollbar ───────────────────────────────────────────── */
+.mobile-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Win95 Menu ─────────────────────────────────────────────────────── */
+.win95-menu {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-darker);
+  box-shadow: 2px 2px 0 #000000;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+}
+
+.win95-menu-sep {
+  height: 0;
+  border-top: 1px solid var(--color-border-dark);
+  border-bottom: 1px solid var(--color-border-light);
+  margin: 3px 4px;
+}
+
+/* ── Win95 Desktop Icon ─────────────────────────────────────────────── */
+.desktop-icon-grid {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 40px;
+  display: grid;
+  grid-template-columns: 88px 1fr 88px;
+  grid-template-rows: 1fr auto;
+  pointer-events: none;
+}
+
+.desktop-icon-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.desktop-icon-col--right {
+  align-items: flex-end;
+}
+
+.desktop-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 4px;
+  background: none;
+  border: none;
+  cursor: default;
+  width: 88px;
+  transition: transform 0.15s ease;
+}
+
+.desktop-icon-btn:hover {
+  transform: translateY(-2px);
+}
+
+.desktop-icon-btn:active {
+  transform: translateY(0);
+}
+
+.win95-icon-label {
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  text-shadow: 1px 1px 0 #000000, -1px 0 0 #000000, 0 -1px 0 #000000;
+  text-align: center;
+  line-height: 1.55;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+  max-width: 84px;
+}
+
+/* ── Desktop sticky note (fun element) ────────────────────────────────── */
+.sticky-note {
+  position: absolute;
+  bottom: 48px;
+  right: 16px;
+  width: 168px;
+  padding: 12px 14px 14px;
+  background: #ffffa5;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.35);
+  transform: rotate(2deg);
+  pointer-events: auto;
+  animation: sticky-wobble 4s ease-in-out infinite;
+  font-family: "Comic Sans MS", "Segoe Print", cursive, var(--font-sys);
+  font-size: 12px;
+  line-height: 1.4;
+  color: #333;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.sticky-note::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 14px;
+  background: rgba(255,255,180,0.7);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+@keyframes sticky-wobble {
+  0%, 100% { transform: rotate(2deg); }
+  50%      { transform: rotate(1deg); }
+}
+
+/* ── Win95 Status Bar ───────────────────────────────────────────────── */
+.win95-statusbar {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border-dark);
+  font-family: var(--font-sys);
+  font-size: var(--text-xs);
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.win95-statusbar-panel {
+  box-shadow:
+    inset  1px  1px 0 #808080,
+    inset -1px -1px 0 #ffffff;
+  padding: 2px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* ── Game: Snake CRT ────────────────────────────────────────────────── */
+.snake-screen {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #0a0a12;
+  user-select: none;
+}
+
+.snake-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #1a1a2e;
+  border-bottom: 2px solid #00ff41;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: #00ff41;
+  flex-shrink: 0;
+}
+
+.snake-canvas-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.snake-canvas-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+.snake-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(0,0,0,0.82);
+  z-index: 10;
+  font-family: var(--font-pixel);
+}
+
+.snake-overlay h2 {
+  margin: 0;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.snake-overlay p {
+  margin: 0;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+}
+
+/* ── Game: Minesweeper ──────────────────────────────────────────────── */
+.mine-game {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #c0c0c0;
+  padding: 12px;
+  user-select: none;
+}
+
+.mine-panel {
+  background: #c0c0c0;
+  padding: 8px;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mine-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  gap: 16px;
+  box-shadow:
+    inset  1px  1px 0 #808080,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #000000,
+    inset -2px -2px 0 #dfdfdf;
+}
+
+.mine-seven-seg {
+  background: #000000;
+  color: #ff0000;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  min-width: 58px;
+  text-align: center;
+  line-height: 1;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff, inset 2px 2px 0 #000000;
+}
+
+.mine-face-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  background: #c0c0c0;
+  border: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+}
+
+.mine-face-btn:active {
+  box-shadow:
+    inset  1px  1px 0 #000000,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #808080,
+    inset -2px -2px 0 #dfdfdf;
+}
+
+.mine-grid {
+  box-shadow:
+    inset  1px  1px 0 #808080,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #000000,
+    inset -2px -2px 0 #dfdfdf;
+  padding: 4px;
+  display: grid;
+}
+
+.mine-cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sys);
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+.mine-cell--hidden {
+  background: #c0c0c0;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+}
+
+.mine-cell--revealed {
+  background: #bdbdbd;
+  box-shadow: inset 1px 1px 0 #808080;
+  border: 1px solid #808080;
+}
+
+.mine-cell--exploded {
+  background: #ff4444;
+}
+
+.mine-status-banner {
+  text-align: center;
+  padding: 8px;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+  font-weight: bold;
+}
+
+/* ── Game: Connect Four ─────────────────────────────────────────────── */
+.c4-game {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #c0c0c0;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
+  user-select: none;
+  overflow: hidden;
+}
+
+.c4-scorebar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-bottom: 1px solid #808080;
+  flex-shrink: 0;
+}
+
+.c4-scorebar-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.c4-scorebar-side--right {
+  justify-content: flex-end;
+}
+
+.c4-piece-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50% !important;
+  border: 2px solid #000;
+  flex-shrink: 0;
+}
+
+.c4-status {
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--text-xs);
+}
+
+.c4-board-frame {
+  background: linear-gradient(180deg, #0030a0 0%, #000080 50%, #000060 100%);
+  box-shadow:
+    inset -2px -2px 0 #000040,
+    inset  2px  2px 0 #4060c0,
+    4px 4px 0 rgba(0,0,0,0.3);
+  padding: 6px;
+}
+
+.c4-hole {
+  background: #000030;
+  border-radius: 50% !important;
+  border: 1px solid #000;
+}
+
+.c4-disc {
+  border-radius: 50% !important;
+  border: 2px solid rgba(0,0,0,0.5);
+  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.2);
+}
+
+.c4-disc--win {
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.8), inset -2px -2px 4px rgba(0,0,0,0.3);
+  animation: c4-pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes c4-pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+
+@keyframes c4-drop {
+  from { transform: translateY(var(--c4-from)); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Project cards ──────────────────────────────────────────────────── */
+.project-card {
+  background: #c0c0c0;
+  padding: 10px;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: default;
+  transition: transform 0.12s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-1px);
+}
+
+.project-card-title {
+  font-weight: bold;
+  font-size: var(--text-sm);
+  overflow-wrap: break-word;
+  word-break: normal;
+  min-width: 0;
+  flex: 1;
+}
+
+.project-tag {
+  font-size: var(--text-xs);
+  padding: 2px 7px;
+  background: #d4d4d4;
+  color: #000;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff;
+  white-space: nowrap;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .window-enter,
+  .sticky-note,
+  .desktop-icon-btn,
+  .project-card,
+  .c4-disc--win {
+    animation: none !important;
+    transition: none !important;
+  }
+  .desktop-icon-btn:hover,
+  .project-card:hover {
+    transform: none;
+  }
+}
