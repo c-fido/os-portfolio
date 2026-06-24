@@ -2,6 +2,25 @@
 
 const P = { imageRendering: 'pixelated', display: 'block', shapeRendering: 'crispEdges' };
 
+// ── Portfolio OS logo (retro window, not Windows flag) ───────────────────────
+export function PortfolioLogo({ size = 14 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 14 14" style={P}>
+      <rect x="0" y="0" width="14" height="14" fill="#000080" />
+      <rect x="1" y="1" width="12" height="2" fill="#c0c0c0" />
+      <rect x="2" y="2" width="2" height="1" fill="#ff0000" />
+      <rect x="1" y="3" width="12" height="10" fill="#ffffff" />
+      <rect x="2" y="5" width="4" height="3" fill="#008080" />
+      <rect x="7" y="5" width="4" height="3" fill="#808000" />
+      <rect x="2" y="9" width="9" height="3" fill="#000080" />
+      <rect x="0" y="0" width="14" height="1" fill="#ffffff" />
+      <rect x="0" y="0" width="1" height="14" fill="#ffffff" />
+      <rect x="13" y="0" width="1" height="14" fill="#404040" />
+      <rect x="0" y="13" width="14" height="1" fill="#404040" />
+    </svg>
+  );
+}
+
 // ── Windows 4-color flag ─────────────────────────────────────────────────────
 export function WindowsFlag({ size = 14 }) {
   return (
@@ -144,7 +163,7 @@ export function EnvelopeIcon({ size = 32 }) {
   );
 }
 
-// ── Terminal — MS-DOS Prompt ─────────────────────────────────────────────────
+// ── Terminal — command shell ─────────────────────────────────────────────────
 export function TerminalIcon({ size = 32 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" style={P}>
@@ -159,27 +178,21 @@ export function TerminalIcon({ size = 32 }) {
       <rect x="1"  y="0"  width="28" height="1"  fill="#000000" />
       <rect x="29" y="0"  width="1"  height="23" fill="#000000" />
       <rect x="1"  y="22" width="29" height="1"  fill="#000000" />
-      {/* screen (black) */}
-      <rect x="3"  y="3"  width="24" height="17" fill="#000000" />
-      {/* C:\> in yellow */}
-      {/* C */}
-      <rect x="5"  y="14" width="1"  height="4"  fill="#cccc00" />
-      <rect x="6"  y="14" width="3"  height="1"  fill="#cccc00" />
-      <rect x="6"  y="17" width="3"  height="1"  fill="#cccc00" />
-      {/* : */}
-      <rect x="10" y="15" width="1"  height="1"  fill="#cccc00" />
-      <rect x="10" y="17" width="1"  height="1"  fill="#cccc00" />
-      {/* \ */}
-      <rect x="12" y="14" width="1"  height="1"  fill="#cccc00" />
-      <rect x="13" y="15" width="1"  height="1"  fill="#cccc00" />
-      <rect x="14" y="16" width="1"  height="1"  fill="#cccc00" />
-      <rect x="15" y="17" width="1"  height="1"  fill="#cccc00" />
-      {/* > */}
-      <rect x="17" y="15" width="1"  height="1"  fill="#cccc00" />
-      <rect x="18" y="16" width="1"  height="1"  fill="#cccc00" />
-      <rect x="17" y="17" width="1"  height="1"  fill="#cccc00" />
+      {/* screen (dark teal) */}
+      <rect x="3"  y="3"  width="24" height="17" fill="#002b36" />
+      {/* ~/ prompt in green */}
+      <rect x="5"  y="14" width="1"  height="4"  fill="#00cc66" />
+      <rect x="6"  y="17" width="3"  height="1"  fill="#00cc66" />
+      <rect x="8"  y="15" width="1"  height="2"  fill="#00cc66" />
+      <rect x="10" y="14" width="1"  height="1"  fill="#00cc66" />
+      <rect x="11" y="15" width="1"  height="1"  fill="#00cc66" />
+      <rect x="12" y="16" width="1"  height="1"  fill="#00cc66" />
+      <rect x="13" y="17" width="1"  height="1"  fill="#00cc66" />
+      <rect x="15" y="15" width="1"  height="1"  fill="#00cc66" />
+      <rect x="16" y="16" width="1"  height="1"  fill="#00cc66" />
+      <rect x="15" y="17" width="1"  height="1"  fill="#00cc66" />
       {/* blinking cursor */}
-      <rect x="20" y="16" width="4"  height="2"  fill="#cccc00" />
+      <rect x="18" y="16" width="4"  height="2"  fill="#00cc66" />
       {/* stand */}
       <rect x="12" y="23" width="6"  height="2"  fill="#c0c0c0" />
       {/* base */}

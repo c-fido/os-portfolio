@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { WindowsFlag, AppIcon } from './Win95Icons';
+import { PortfolioLogo, AppIcon } from './Win95Icons';
 
 function Clock() {
   const [time, setTime] = useState(new Date());
@@ -56,7 +56,7 @@ function StartButton() {
           : 'inset -1px -1px 0 #000000, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf',
       }}
     >
-      <WindowsFlag size={14} />
+      <PortfolioLogo size={14} />
       <span>Start</span>
     </button>
   );

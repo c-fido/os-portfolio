@@ -3,6 +3,16 @@ import { person, skills, projects } from '../../data/portfolio';
 
 const PROMPT = `C:\\PORTFOLIO>`;
 const TERM_FONT = '11px';
+const SHELL_NAME = 'Portfolio Shell';
+const SHELL_VERSION = '1.00';
+const BOOT_BANNER = [
+  '   _____ _                            _       ',
+  '  / ____(_)                          | |      ',
+  ' | |  __ _  __ _ _ __   ___ __ _ _ __| | ___  ',
+  " | | |_ | |/ _` | '_ \\ / __/ _` | '__| |/ _ \\ ",
+  ' | |__| | | (_| | | | | (_| (_| | |  | | (_) |',
+  '  \\_____|_|\\__,_|_| |_|\\___\\__,_|_|  |_|\\___/ ',
+].join('\n');
 
 const COMMANDS = {
   help: () => `
@@ -25,15 +35,16 @@ Type any command and press Enter.
 ${person.name} -- ${person.title}
 Location: ${person.location}
 
-I build beautiful, performant web applications.
-Passionate about the intersection of design and engineering.
+I'm a Computer Science & German student at Wesleyan University (Class of 2027) based in Connecticut. I enjoy building things, from web apps and terminal games to bioinformatics pipelines.
+
+Currently in Middletown, CT working on a project with Professor Chang-Davidson on additive manufacturing.
 
 Type SKILLS or CONTACT for more info.
 `.trim(),
 
   whoami: () => `${person.name.toLowerCase().replace(' ', '-')}`,
 
-  ver: () => `Microsoft(R) Portfolio OS  Version 1.00\nCopyright (C) ${person.name}. All rights reserved.`,
+  ver: () => `${SHELL_NAME}  Version ${SHELL_VERSION}\nCopyright (C) ${person.name}. All rights reserved.`,
 
   date: () => `Current date is: ${new Date().toLocaleDateString()}`,
 
@@ -90,7 +101,7 @@ export default function Terminal() {
   const [history, setHistory] = useState([
     {
       type: 'system',
-      text: `Microsoft(R) Portfolio OS  Version 1.00\nCopyright (C) ${person.name}. All rights reserved.\n`,
+      text: `${BOOT_BANNER}\n\n${SHELL_NAME}  Version ${SHELL_VERSION}\nCopyright (C) ${person.name}. All rights reserved.\n`,
     },
     {
       type: 'system',

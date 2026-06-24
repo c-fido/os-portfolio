@@ -6,7 +6,7 @@ import Resume from './apps/Resume';
 import Terminal from './apps/Terminal';
 import Contact from './apps/Contact';
 import { person } from '../data/portfolio';
-import { AppIcon, WindowsFlag } from './Win95Icons';
+import { AppIcon, PortfolioLogo } from './Win95Icons';
 
 const TABS = [
   { id: 'projects', label: 'Projects', Component: Projects },
@@ -38,7 +38,7 @@ export default function MobileLayout() {
         alignItems: 'center',
         gap: '8px',
       }}>
-        <WindowsFlag size={18} />
+        <PortfolioLogo size={18} />
         <div style={{ minWidth: 0 }}>
           <div style={{ color: '#fff', fontWeight: 'bold', fontSize: 'var(--text-sm)' }}>{person.name}</div>
           <div style={{ color: '#c0c0c0', fontSize: 'var(--text-xs)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{person.title}</div>

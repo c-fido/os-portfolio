@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { WindowsFlag } from './Win95Icons';
+import { person } from '../data/portfolio';
+import { PortfolioLogo } from './Win95Icons';
 
 const STAGES = [
-  { label: 'Starting Windows 95...', pct: 20,  delay: 400 },
+  { label: 'Starting Portfolio OS...', pct: 20,  delay: 400 },
   { label: 'Loading system drivers...', pct: 40, delay: 500 },
   { label: 'Initializing hardware...', pct: 60, delay: 400 },
   { label: 'Starting window manager...', pct: 80, delay: 500 },
@@ -47,14 +48,14 @@ export default function BootScreen({ onComplete }) {
     }}>
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-          <WindowsFlag size={72} />
+          <PortfolioLogo size={72} />
         </div>
-        <div style={{ color: '#c8c8c8', letterSpacing: '3px', marginBottom: '4px' }}>Microsoft</div>
+        <div style={{ color: '#c8c8c8', letterSpacing: '3px', marginBottom: '4px' }}>Portfolio</div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', justifyContent: 'center' }}>
-          <span style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px' }}>Windows</span>
-          <span style={{ color: '#fff', fontSize: '16px', fontStyle: 'italic', opacity: 0.9 }}>95</span>
+          <span style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px' }}>Shell</span>
+          <span style={{ color: '#fff', fontSize: '16px', fontStyle: 'italic', opacity: 0.9 }}>OS</span>
         </div>
-        <p style={{ color: '#606060', marginTop: '10px', letterSpacing: '1px' }}>Portfolio Edition</p>
+        <p style={{ color: '#606060', marginTop: '10px', letterSpacing: '1px' }}>Personal Edition</p>
       </div>
 
       <div style={{ width: '260px' }}>
@@ -88,8 +89,8 @@ export default function BootScreen({ onComplete }) {
         position: 'absolute', bottom: '16px', color: '#404040',
         fontFamily: 'var(--font-sys)', fontSize: '11px', textAlign: 'center', lineHeight: 1.6,
       }}>
-        <p style={{ margin: 0 }}>Microsoft Windows 95</p>
-        <p style={{ margin: 0 }}>Copyright © 1981-1995 Microsoft Corp.</p>
+        <p style={{ margin: 0 }}>Portfolio Shell OS</p>
+        <p style={{ margin: 0 }}>Copyright © {new Date().getFullYear()} {person.name}. All rights reserved.</p>
       </div>
     </div>
   );

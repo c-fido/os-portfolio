@@ -139,7 +139,7 @@ export default function Desktop() {
     {
       label: 'About this Portfolio',
       action: () => {
-        alert(`Portfolio OS — Windows 95 Edition\n\nBuilt by ${person.name}\nReact + Vite + Framer Motion\n\n${person.email}`);
+        alert(`Portfolio Shell OS\n\nBuilt by ${person.name}\nReact + Vite + Framer Motion\n\n${person.email}`);
       },
     },
   ];
