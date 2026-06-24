@@ -17,7 +17,7 @@ export const bio = `Hi, I'm Giancarlo!
 
 I'm a Computer Science & German student at Wesleyan University (Class of 2027) based in Connecticut. I enjoy building things, from web apps and terminal games to bioinformatics pipelines.
 
-Most recently I interned as a Software Engineer at turingpoint GmbH in Hamburg, where I built a vulnerability database using Python and the OpenAI API. I'm currently working as a Research Assistant in Wesleyan's Bioinformatics lab, analyzing genome sequencing data with Python.
+Most recently I interned as a Software Engineer at turingpoint GmbH in Hamburg, where I built a vulnerability database using Python and the OpenAI API. I'm currently working as a Research Assistant in Wesleyan's Bioinformatics lab, analyzing genome sequencing data with Python, and Wesleyan's Additive Manufacturing Lab, running simulations and doing data analysis with Python and C++.
 
 Outside of coding I run varsity indoor and outdoor track, and I speak German at a B2 level.
 
@@ -37,8 +37,9 @@ Outside of coding I run varsity indoor and outdoor track, and I speak German at 
 → Bioinformatics & data pipelines
 → Full-stack web applications
 → Language learning (German B2)
+→ Running, reading, and parkour!
 
-Feel free to reach out, I'm always open to interesting projects!
+Feel free to reach out, I'm always open to interesting projects or book recommendations!
 
 fedolficarlo@gmail.com`;
 

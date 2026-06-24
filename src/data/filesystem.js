@@ -30,8 +30,8 @@ export const filesystem = {
           p.description,
           '',
           `**Tags:** ${p.tags.join(', ')}`,
-          p.github  ? `\n[GitHub](${p.github})`   : '',
-          p.demo    ? `  [Live Demo](${p.demo})`   : '',
+          p.github ? `\n[GitHub](${p.github})` : '',
+          p.demo ? `  [Live Demo](${p.demo})` : '',
         ].join('\n'),
       })),
     },
@@ -60,11 +60,11 @@ export const filesystem = {
           type: 'file',
           content: `# Why I Code
 
-I started coding because I wanted to build things that didn't exist yet. There's something deeply satisfying about turning an idea into something real — something you can click, interact with, share.
+I started coding because I genuinely love working and twiddling with code and computers. Since middle school, I've been fascinated by computers and technology. 
 
-For me, coding sits at the intersection of creativity and logic. You get to design systems, solve puzzles, and craft user experiences — all at once.
+Whether it's building my own computers, fixing laptops, failing to work with Linux, or building my own websites, I've always been fascinated by the process of turning ideas into reality.
 
-Whether it's a terminal game in C++, a bioinformatics pipeline, or a portfolio that looks like a desktop OS, I'm always looking for projects that let me learn something genuinely new.`,
+There's something really fun about seeing something you made come to life on your screen, something I haven't found in any other field of study.`,
         },
       ],
     },

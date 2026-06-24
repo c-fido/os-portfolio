@@ -124,8 +124,16 @@ export default function Desktop() {
     },
     { separator: true },
     {
+      label: 'Play Minesweeper',
+      action: () => openWindow('minesweeper'),
+    },
+    {
       label: 'Play Snake',
       action: () => openWindow('snake'),
+    },
+    {
+      label: 'Play Connect 4',
+      action: () => openWindow('connect4'),
     },
     { separator: true },
     {
