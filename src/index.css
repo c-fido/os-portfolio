@@ -750,6 +750,176 @@ img, canvas, svg {
   white-space: nowrap;
 }
 
+/* ── Book cards ───────────────────────────────────────────────────── */
+.books-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 4px 8px 0;
+  flex-shrink: 0;
+}
+
+.books-tab {
+  padding: 4px 10px 3px;
+  background: #a8a8a8;
+  border: 1px solid #808080;
+  border-bottom: none;
+  cursor: default;
+  font-family: var(--font-sys);
+  font-size: var(--text-xs);
+  color: #000;
+  position: relative;
+  top: 1px;
+}
+
+.books-tab--active {
+  background: #fff;
+  z-index: 1;
+  padding-bottom: 4px;
+  box-shadow:
+    inset -1px 0 0 #808080,
+    inset 1px 0 0 #fff;
+}
+
+.books-tab:focus {
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 128px));
+  gap: 8px;
+  justify-content: start;
+}
+
+.book-card {
+  background: #c0c0c0;
+  width: 100%;
+  max-width: 128px;
+  box-shadow:
+    inset -1px -1px 0 #000000,
+    inset  1px  1px 0 #ffffff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  overflow: hidden;
+}
+
+.book-card--link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.book-card--link:hover {
+  background: #d4d4d4;
+}
+
+.book-card--link:active {
+  box-shadow:
+    inset  1px  1px 0 #000000,
+    inset -1px -1px 0 #ffffff,
+    inset  2px  2px 0 #808080,
+    inset -2px -2px 0 #dfdfdf;
+}
+
+.book-card-cover {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  flex-shrink: 0;
+  background: #808080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-card-rank {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 1;
+  min-width: 18px;
+  padding: 1px 4px;
+  background: #000080;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: inset -1px -1px 0 #000, inset 1px 1px 0 #8080ff;
+}
+
+.book-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.book-card-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: var(--text-xs);
+}
+
+.book-card-body {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.book-card-title {
+  font-weight: bold;
+  font-size: var(--text-xs);
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.book-card-description {
+  margin: 0;
+  color: #222;
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.book-card-skeleton {
+  background: #a8a8a8;
+  animation: book-pulse 1.2s ease-in-out infinite;
+}
+
+.book-card-cover--loading {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  background: #a8a8a8;
+  animation: book-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes book-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .window-enter,

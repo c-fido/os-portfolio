@@ -12,6 +12,7 @@ import Minesweeper from './apps/Minesweeper';
 import Snake from './apps/Snake';
 import Finder from './apps/Finder';
 import ConnectFour from './apps/ConnectFour';
+import Books from './apps/Books';
 import { useWindowManager } from '../hooks/useWindowManager';
 import { person } from '../data/portfolio';
 import { AppIcon } from './Win95Icons';
@@ -26,12 +27,14 @@ const APP_COMPONENTS = {
   snake:    Snake,
   finder:   Finder,
   connect4: ConnectFour,
+  books:    Books,
 };
 
 const PORTFOLIO_ICONS = [
   { id: 'about',    label: 'About'     },
   { id: 'resume',   label: 'Resume'    },
   { id: 'projects', label: 'Projects'  },
+  { id: 'books',    label: 'Books'     },
   { id: 'contact',  label: 'Contact'   },
   { id: 'terminal', label: 'Terminal'  },
   { id: 'finder',   label: 'My PC'     },

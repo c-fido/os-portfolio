@@ -10,6 +10,7 @@ const WINDOW_CONFIGS = {
   snake:       { title: 'Snake.app',       width: 480, height: 520 },
   finder:      { title: 'Finder.app',      width: 760, height: 500 },
   connect4:    { title: 'Connect Four',    width: 480, height: 560 },
+  books:       { title: 'Books.app',       width: 780, height: 520 },
 };
 
 function clampPosition(x, y, width, height) {
@@ -22,7 +23,7 @@ function clampPosition(x, y, width, height) {
 }
 
 function getInitialPosition(id, width, height) {
-  const offsets = { projects: 0, about: 1, resume: 2, terminal: 3, contact: 4, minesweeper: 5, connect4: 6, snake: 7, finder: 8 };
+  const offsets = { projects: 0, about: 1, resume: 2, terminal: 3, contact: 4, books: 5, minesweeper: 6, connect4: 7, snake: 8, finder: 9 };
   const offset = (offsets[id] ?? 0) * 30;
   const x = Math.max(60, (window.innerWidth - width) / 2 + offset);
   const y = Math.max(40, (window.innerHeight - height) / 2 + offset - 40);

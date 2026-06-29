@@ -5,11 +5,13 @@ import About from './apps/About';
 import Resume from './apps/Resume';
 import Terminal from './apps/Terminal';
 import Contact from './apps/Contact';
+import Books from './apps/Books';
 import { person } from '../data/portfolio';
 import { AppIcon, PortfolioLogo } from './Win95Icons';
 
 const TABS = [
   { id: 'projects', label: 'Projects', Component: Projects },
+  { id: 'books',    label: 'Books',    Component: Books },
   { id: 'about',    label: 'About',    Component: About },
   { id: 'resume',   label: 'Resume',   Component: Resume },
   { id: 'terminal', label: 'Terminal', Component: Terminal },

@@ -383,11 +383,31 @@ export function Connect4Icon({ size = 32 }) {
   );
 }
 
+// ── Book — Books.app ─────────────────────────────────────────────────────────
+export function BookIcon({ size = 32 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" style={P}>
+      <rect x="6" y="5" width="20" height="24" fill="#808080" />
+      <rect x="4" y="3" width="20" height="24" fill="#8b4513" />
+      <rect x="4" y="3" width="4" height="24" fill="#5c2e0a" />
+      <rect x="9" y="8" width="12" height="2" fill="#ffd700" />
+      <rect x="9" y="12" width="10" height="1" fill="#deb887" />
+      <rect x="9" y="15" width="11" height="1" fill="#deb887" />
+      <rect x="9" y="18" width="9" height="1" fill="#deb887" />
+      <rect x="3" y="3" width="1" height="25" fill="#000000" />
+      <rect x="4" y="3" width="20" height="1" fill="#000000" />
+      <rect x="4" y="27" width="20" height="1" fill="#000000" />
+      <rect x="23" y="3" width="1" height="25" fill="#000000" />
+    </svg>
+  );
+}
+
 // ── Icon lookup map ──────────────────────────────────────────────────────────
 export const ICON_MAP = {
   about:       NotepadIcon,
   resume:      DocumentIcon,
   projects:    FolderIcon,
+  books:       BookIcon,
   contact:     EnvelopeIcon,
   terminal:    TerminalIcon,
   finder:      ComputerIcon,
