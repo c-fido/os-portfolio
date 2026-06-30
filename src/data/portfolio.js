@@ -19,13 +19,13 @@ I'm a Computer Science & German student at Wesleyan University (Class of 2027) b
 
 Most recently I interned as a Software Engineer at turingpoint GmbH in Hamburg, where I built a vulnerability database using Python and the OpenAI API. I'm currently working as a Research Assistant in Wesleyan's Bioinformatics lab, analyzing genome sequencing data with Python, and Wesleyan's Additive Manufacturing Lab, running simulations and doing data analysis with Python and C++.
 
-Outside of coding I run varsity indoor and outdoor track, and I speak German at a B2 level.
+Outside of coding I'm a captain for the varsity indoor and outdoor track teams, and I speak German at a B2 level.
 
 ── Currently ──────────────────────────────────
 → Bioinformatics Research @ Wesleyan University
 → Additive Manufacturing Research @ Wesleyan University
 → B.A. Computer Science & German (Expected May 2027)
-→ Building personal projects and contributing to open source
+→ Building personal projects
 
 ── Technical Stack ────────────────────────────
 → Languages: Python, C++, C, JavaScript, SQL, PHP, C#, GDScript
