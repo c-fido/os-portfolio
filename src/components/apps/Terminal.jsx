@@ -37,9 +37,9 @@ Location: ${person.location}
 
 I'm a Computer Science & German student at Wesleyan University (Class of 2027) based in Connecticut. I enjoy building things, from web apps and terminal games to bioinformatics pipelines.
 
-Currently in Middletown, CT working on a project with Professor Chang-Davidson on additive manufacturing.
+Currently building Remindr (CLI reminder tool + web sync at remindr.gfedolfi.dev), doing bioinformatics research, and additive manufacturing simulation work at Wesleyan.
 
-Type SKILLS or CONTACT for more info.
+Type SKILLS, PROJECTS, or CONTACT for more info.
 `.trim(),
 
   whoami: () => `${person.name.toLowerCase().replace(' ', '-')}`,
@@ -57,9 +57,10 @@ Type SKILLS or CONTACT for more info.
   },
 
   projects: () => {
-    const lines = projects.map((p, i) =>
-      `  ${String(i + 1).padStart(2, '0')}  ${p.title.padEnd(25)} ${p.tags.slice(0, 2).join(', ')}`
-    );
+    const lines = projects.map((p, i) => {
+      const link = p.demo ? `  ${p.demo}` : p.github ? `  ${p.github}` : '';
+      return `  ${String(i + 1).padStart(2, '0')}  ${p.title.padEnd(22)} ${p.tags.slice(0, 2).join(', ')}${link ? '\n' + link : ''}`;
+    });
     return `Directory of PROJECTS\n${lines.join('\n')}\n       ${projects.length} file(s)`;
   },
 

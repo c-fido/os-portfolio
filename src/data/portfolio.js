@@ -22,86 +22,74 @@ Most recently I interned as a Software Engineer at turingpoint GmbH in Hamburg, 
 Outside of coding I'm a captain for the varsity indoor and outdoor track teams, and I speak German at a B2 level.
 
 ── Currently ──────────────────────────────────
+→ Remindr — CLI reminder tool with web sync (remindr.gfedolfi.dev)
 → Bioinformatics Research @ Wesleyan University
 → Additive Manufacturing Research @ Wesleyan University
 → B.A. Computer Science & German (Expected May 2027)
-→ Building personal projects
 
 ── Technical Stack ────────────────────────────
-→ Languages: Python, C++, C, JavaScript, SQL, PHP, C#, GDScript
+→ Languages: Python, C++, C, Go, JavaScript, TypeScript, SQL, PHP, C#, GDScript
 → Frameworks: React, Django, Node.js, MongoDB, BeautifulSoup
 → Tools: Git, Figma, JIRA, LiteLLM
 
 ── Interests ──────────────────────────────────
-→ Systems programming & game development
+→ Systems programming & CLI tools
 → Bioinformatics & data pipelines
 → Full-stack web applications
 → Language learning (German B2)
 → Running, reading, and parkour!
+
+── Links ──────────────────────────────────────
+→ GitHub:   github.com/c-fido
+→ Website:  gfedolfi.dev
+→ Remindr:  remindr.gfedolfi.dev
+→ LinkedIn: linkedin.com/in/giancarlo-fedolfi-652026306
 
 Feel free to reach out, I'm always open to interesting projects or book recommendations!
 
 fedolficarlo@gmail.com`;
 
 export const skills = {
-  languages: ["Python", "C++", "C", "JavaScript", "SQL", "PHP", "C#", "SMLNJ", "GDScript"],
-  frameworks: ["React", "Django", "Node.js", "Git", "MongoDB", "Figma", "LiteLLM", "BeautifulSoup", "JIRA", "Microsoft Office"],
+  languages: ["Python", "C++", "C", "Go", "JavaScript", "TypeScript", "SQL", "PHP", "C#", "Swift", "SMLNJ", "GDScript"],
+  frameworks: ["React", "Django", "Node.js", "PostgreSQL", "MongoDB", "Git", "Figma", "LiteLLM", "BeautifulSoup", "JIRA"],
 };
 
 export const projects = [
   {
     id: 1,
+    title: "Remindr",
+    description: "Offline-first CLI reminder tool for macOS and Linux — daemon/CLI split, native notifications, natural language scheduling, and optional cloud sync via a Go API and React web dashboard.",
+    tags: ["C++", "Go", "React", "Swift"],
+    github: "https://github.com/c-fido/Remindr",
+    demo: "https://remindr.gfedolfi.dev",
+    featured: true,
+  },
+  {
+    id: 2,
     title: "Portfolio OS",
-    description: "This site — a portfolio that looks and feels like a desktop OS, with draggable windows, a terminal, and built-in games.",
+    description: "This site! A Win95-style portfolio with draggable windows, a working terminal, built-in games, a Books app, and a Finder file browser.",
     tags: ["React", "Vite", "JavaScript"],
     github: "https://github.com/c-fido/os-portfolio",
     demo: "https://gfedolfi.dev",
     featured: true,
   },
   {
-    id: 2,
+    id: 3,
     title: "TermiTama",
-    description: "A Tamagotchi-like game playable entirely in the terminal, with a TUI and genetics for offspring from multiple Tamagotchi.",
-    tags: ["C++", "TUI", "Terminal"],
+    description: "A Tamagotchi-like game playable entirely in the terminal. Using FTXUI TUI, offline stat decay, genetics & breeding across up to 6 pets, and JSON persistence.",
+    tags: ["C++", "TUI", "FTXUI"],
     github: "https://github.com/c-fido/termitama",
     demo: null,
     featured: true,
   },
   {
-    id: 3,
+    id: 4,
     title: "Typing Trainer",
-    description: "A terminal-based typing trainer with WPM tracking, paired-letter accuracy, locally-hosted multiplayer, and targeted practice for weak keys.",
+    description: "A terminal-based typing trainer with WPM tracking, SM-2 spaced repetition for bigrams, locally-hosted multiplayer, ghost-race replay, and per-session CSV logging.",
     tags: ["C++", "Terminal", "Multiplayer"],
     github: "https://github.com/c-fido/typing_trainer",
     demo: null,
     featured: true,
-  },
-  {
-    id: 4,
-    title: "Remindr",
-    description: "A lightweight desktop notification scheduler for macOS and Linux, built with two binaries and a shared helper library.",
-    tags: ["C++", "macOS", "Linux"],
-    github: "https://github.com/c-fido/Remindr",
-    demo: null,
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "Personal Site",
-    description: "A personal website built with TypeScript — a simpler, earlier iteration of my web presence.",
-    tags: ["TypeScript", "Web"],
-    github: "https://github.com/c-fido/personal-site",
-    demo: null,
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "Spark",
-    description: "Led a cross-functional team of 5 to build an educational game teaching students about renewable energy, using Godot and GDScript.",
-    tags: ["Godot", "GDScript", "Game Dev"],
-    github: "https://github.com/The-Spark-Industries/spark-energy",
-    demo: null,
-    featured: false,
   },
 ];
 
@@ -145,12 +133,12 @@ export const resume = {
   ],
   projects: [
     {
-      title: "Sports Warehouse",
-      tags: "React Native, PHP, PostgreSQL, MongoDB",
-      period: "May 2025",
+      title: "Remindr",
+      tags: "C++, Go, React, Swift, PostgreSQL",
+      period: "Jun. 2026 – Present",
       bullets: [
-        "Built a full-stack Android app with React Native (Expo), a PHP backend, MongoDB for product data, and PostgreSQL for inventory queries, as part of a 3-person team.",
-        "Added inventory and order management features with full CRUD support.",
+        "Built an offline-first reminder system with CLI/daemon split architecture, Unix domain socket IPC, natural language time parsing, and recurrence scheduling; Swift helper for native macOS Notification Center delivery.",
+        "Added cloud sync with a Go REST API (Railway + Neon Postgres), JWT auth, and a React web dashboard — background push/pull every 60s with last-write-wins merge.",
       ],
     },
     {
@@ -172,12 +160,11 @@ export const resume = {
       ],
     },
     {
-      title: "Remindr",
-      tags: "C++, Swift",
-      period: "May 2026",
+      title: "Portfolio OS",
+      tags: "React, Vite, JavaScript",
+      period: "Jun. 2026",
       bullets: [
-        "Built a cross-platform (macOS/Linux) desktop notification scheduler with a daemon/CLI split architecture, Unix domain socket IPC, natural language time parsing, and recurrence scheduling.",
-        "Swift helper for native macOS UNUserNotificationCenter notifications; persistent JSON reminder store via nlohmann/json.",
+        "Built a Win95-style portfolio site with draggable windows, a working terminal, built-in games, a Books app, and a Finder file browser.",
       ],
     },
   ],

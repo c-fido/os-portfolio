@@ -86,6 +86,7 @@ export default function Contact() {
           <div style={{ display: 'flex', gap: '14px' }}>
             <a href={person.github} target="_blank" rel="noopener noreferrer" style={{ color: '#000080' }}>GitHub</a>
             <a href={person.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#000080' }}>LinkedIn</a>
+            <a href={person.website} target="_blank" rel="noopener noreferrer" style={{ color: '#000080' }}>Website</a>
           </div>
           {sent ? (
             <span style={{ color: '#008000' }}>Opening email client...</span>
