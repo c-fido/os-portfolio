@@ -18,7 +18,7 @@ function getNodeAtPath(root, path) {
 }
 
 function pathKey(path) {
-  return ['~', ...path].join('/');
+  return [filesystem.name, ...path].join('\\');
 }
 
 function NodeIcon({ node, size = 28 }) {
@@ -29,7 +29,7 @@ function NodeIcon({ node, size = 28 }) {
 }
 
 function Breadcrumb({ path, onNavigate }) {
-  const crumbs = ['~', ...path];
+  const crumbs = [filesystem.name, ...path];
   return (
     <div style={{
       display: 'flex',
@@ -313,7 +313,7 @@ function ContentPanel({ selectedPath, onSelect, onOpenApp }) {
 
 export default function Finder({ onOpenApp }) {
   const [selectedPath, setSelectedPath] = useState([]);
-  const [expandedKeys, setExpandedKeys] = useState(() => new Set(['~']));
+  const [expandedKeys, setExpandedKeys] = useState(() => new Set([filesystem.name]));
 
   const handleSelect = useCallback((path) => {
     setSelectedPath(path);

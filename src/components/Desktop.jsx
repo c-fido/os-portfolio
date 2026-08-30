@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Window from './Window';
 import Taskbar from './Taskbar';
@@ -16,6 +16,7 @@ import Books from './apps/Books';
 import { useWindowManager } from '../hooks/useWindowManager';
 import { person } from '../data/portfolio';
 import { AppIcon } from './Win95Icons';
+import { getHashApp, setAppHash } from '../lib/apps';
 
 const APP_COMPONENTS = {
   projects: Projects,
@@ -31,25 +32,25 @@ const APP_COMPONENTS = {
 };
 
 const PORTFOLIO_ICONS = [
-  { id: 'about',    label: 'About'     },
-  { id: 'resume',   label: 'Resume'    },
-  { id: 'projects', label: 'Projects'  },
-  { id: 'books',    label: 'Books'     },
-  { id: 'contact',  label: 'Contact'   },
-  { id: 'terminal', label: 'Terminal'  },
-  { id: 'finder',   label: 'My PC'     },
+  { id: 'about',    label: 'About.txt'      },
+  { id: 'resume',   label: 'Resume.pdf'     },
+  { id: 'projects', label: 'Projects'       },
+  { id: 'books',    label: 'Books'          },
+  { id: 'contact',  label: 'Inbox'          },
+  { id: 'terminal', label: 'MS-DOS Prompt'  },
+  { id: 'finder',   label: 'My Computer'    },
 ];
 
 const GAME_ICONS = [
-  { id: 'minesweeper', label: 'Mines'     },
-  { id: 'snake',       label: 'Snake'     },
-  { id: 'connect4',    label: 'Connect 4' },
+  { id: 'minesweeper', label: 'Minesweeper'  },
+  { id: 'snake',       label: 'Snake'        },
+  { id: 'connect4',    label: 'Connect Four' },
 ];
 
 const STICKY_TIPS = [
-  'Double-click icons to open apps!',
-  'Try the Terminal — type "help"',
-  'Can you beat the Connect 4 bot?',
+  'Click icons to open apps',
+  'Try MS-DOS Prompt — type HELP',
+  'Can you beat the Connect Four bot?',
   'Right-click the desktop for shortcuts',
   'Play Snake for a high score challenge',
 ];
@@ -60,8 +61,8 @@ function DesktopIcon({ id, label, onOpen }) {
   return (
     <button
       className="desktop-icon-btn"
-      onDoubleClick={onOpen}
-      onClick={() => setSelected(s => !s)}
+      onClick={onOpen}
+      onFocus={() => setSelected(true)}
       onBlur={() => setSelected(false)}
     >
       <div
@@ -77,7 +78,7 @@ function DesktopIcon({ id, label, onOpen }) {
       <span
         className="win95-icon-label"
         style={{
-          background: selected ? '#000080' : 'transparent',
+          background: selected ? 'var(--color-highlight)' : 'transparent',
           padding: '2px 4px',
         }}
       >
@@ -88,7 +89,7 @@ function DesktopIcon({ id, label, onOpen }) {
 }
 
 function StickyNote() {
-  const tip = STICKY_TIPS[Math.floor(Math.random() * STICKY_TIPS.length)];
+  const [tip] = useState(() => STICKY_TIPS[Math.floor(Math.random() * STICKY_TIPS.length)]);
 
   return (
     <div className="sticky-note" title="Portfolio tips">
@@ -103,11 +104,43 @@ function StickyNote() {
 
 export default function Desktop() {
   const [contextMenu, setContextMenu] = useState(null);
+  const didInit = useRef(false);
   const {
-    windows, configs,
-    openWindow, closeWindow, minimizeWindow, focusWindow,
+    windows,
+    openWindow, closeWindow, minimizeWindow, maximizeWindow, focusWindow,
     moveWindow, resizeWindow, updateWindow,
   } = useWindowManager();
+
+  const openApp = useCallback((id) => {
+    openWindow(id);
+    setAppHash(id);
+  }, [openWindow]);
+
+  const focusApp = useCallback((id) => {
+    focusWindow(id);
+    setAppHash(id);
+  }, [focusWindow]);
+
+  useEffect(() => {
+    const applyHash = () => {
+      const id = getHashApp();
+      if (id) openWindow(id);
+    };
+
+    if (!didInit.current) {
+      didInit.current = true;
+      const id = getHashApp();
+      if (id) {
+        openWindow(id);
+      } else {
+        openWindow('about');
+        setAppHash('about');
+      }
+    }
+
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, [openWindow]);
 
   const handleDesktopContextMenu = useCallback((e) => {
     e.preventDefault();
@@ -117,32 +150,19 @@ export default function Desktop() {
   const closeContextMenu = useCallback(() => setContextMenu(null), []);
 
   const contextItems = [
-    {
-      label: 'Open Projects',
-      action: () => openWindow('projects'),
-    },
-    {
-      label: 'Open About',
-      action: () => openWindow('about'),
-    },
+    { label: 'Open Projects', action: () => openApp('projects') },
+    { label: 'Open About.txt', action: () => openApp('about') },
+    { label: 'Open Resume.pdf', action: () => openApp('resume') },
+    { label: 'Open Inbox', action: () => openApp('contact') },
     { separator: true },
-    {
-      label: 'Play Minesweeper',
-      action: () => openWindow('minesweeper'),
-    },
-    {
-      label: 'Play Snake',
-      action: () => openWindow('snake'),
-    },
-    {
-      label: 'Play Connect 4',
-      action: () => openWindow('connect4'),
-    },
+    { label: 'Minesweeper', action: () => openApp('minesweeper') },
+    { label: 'Snake', action: () => openApp('snake') },
+    { label: 'Connect Four', action: () => openApp('connect4') },
     { separator: true },
     {
       label: 'About this Portfolio',
       action: () => {
-        alert(`Portfolio Shell OS\n\nBuilt by ${person.name}\nReact + Vite + Framer Motion\n\n${person.email}`);
+        alert(`Portfolio Shell OS\n\nBuilt by ${person.name}\nReact + Vite\n\n${person.email}`);
       },
     },
   ];
@@ -157,7 +177,6 @@ export default function Desktop() {
       onContextMenu={handleDesktopContextMenu}
       onClick={closeContextMenu}
     >
-      {/* Desktop icon layout — portfolio left, games right */}
       <div className="desktop-icon-grid">
         <div className="desktop-icon-col">
           {PORTFOLIO_ICONS.map(item => (
@@ -165,7 +184,7 @@ export default function Desktop() {
               key={item.id}
               id={item.id}
               label={item.label}
-              onOpen={() => openWindow(item.id)}
+              onOpen={() => openApp(item.id)}
             />
           ))}
         </div>
@@ -176,7 +195,7 @@ export default function Desktop() {
               key={item.id}
               id={item.id}
               label={item.label}
-              onOpen={() => openWindow(item.id)}
+              onOpen={() => openApp(item.id)}
             />
           ))}
         </div>
@@ -184,11 +203,11 @@ export default function Desktop() {
 
       <StickyNote />
 
-      {/* Windows */}
       <AnimatePresence>
         {Object.values(windows).map(win => {
           if (win.minimized) return null;
           const AppComponent = APP_COMPONENTS[win.id];
+          if (!AppComponent) return null;
           return (
             <Window
               key={win.id}
@@ -196,13 +215,14 @@ export default function Desktop() {
               isActive={win.zIndex === maxZ}
               onClose={closeWindow}
               onMinimize={minimizeWindow}
-              onFocus={focusWindow}
+              onMaximize={maximizeWindow}
+              onFocus={focusApp}
               onMove={moveWindow}
               onResize={resizeWindow}
             >
               <AppComponent
                 onTitleChange={(title) => updateWindow(win.id, { title })}
-                onOpenApp={openWindow}
+                onOpenApp={openApp}
               />
             </Window>
           );
@@ -211,9 +231,8 @@ export default function Desktop() {
 
       <Taskbar
         windows={windows}
-        configs={configs}
-        openWindow={openWindow}
-        focusWindow={focusWindow}
+        openWindow={openApp}
+        focusWindow={focusApp}
         minimizeWindow={minimizeWindow}
         maxZ={maxZ}
       />

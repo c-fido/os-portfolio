@@ -36,8 +36,8 @@ export default function ContextMenu({ x, y, items, onClose }) {
         border: '1px solid #000000',
         boxShadow: '2px 2px 0 #000000',
         padding: '2px',
-        fontFamily: '"Press Start 2P", "MS Sans Serif", monospace',
-        fontSize: '7px',
+        fontFamily: 'var(--font-sys)',
+        fontSize: '11px',
       }}
     >
       {items.map((item, i) =>
@@ -66,8 +66,8 @@ export default function ContextMenu({ x, y, items, onClose }) {
               border: 'none',
               cursor: 'default',
               textAlign: 'left',
-              fontFamily: '"Press Start 2P", "MS Sans Serif", monospace',
-              fontSize: '7px',
+              fontFamily: 'var(--font-sys)',
+              fontSize: '11px',
               color: item.disabled ? '#808080' : '#000000',
             }}
             onMouseEnter={e => {

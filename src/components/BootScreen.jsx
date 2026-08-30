@@ -11,9 +11,9 @@ const STAGES = [
 ];
 
 const BOOT_TIPS = [
-  'Tip: Double-click desktop icons to open apps',
-  'Tip: Try the Terminal — type "help"',
-  'Tip: Can you beat the Connect 4 bot?',
+  'Tip: Click desktop icons to open apps',
+  'Tip: Try MS-DOS Prompt — type HELP',
+  'Tip: Can you beat the Connect Four bot?',
   'Tip: Right-click the desktop for shortcuts',
   'Tip: Play Snake and set a high score!',
 ];
@@ -23,6 +23,14 @@ export default function BootScreen({ onComplete }) {
   const [tip] = useState(() => BOOT_TIPS[Math.floor(Math.random() * BOOT_TIPS.length)]);
 
   useEffect(() => {
+    const skip = (e) => {
+      if (e.key === 'Enter' || e.key === 'Escape' || e.key === ' ') {
+        e.preventDefault();
+        onComplete();
+      }
+    };
+    window.addEventListener('keydown', skip);
+
     const timeouts = [];
     function advance(i) {
       if (i >= STAGES.length) {
@@ -35,7 +43,10 @@ export default function BootScreen({ onComplete }) {
       }, STAGES[i].delay));
     }
     advance(0);
-    return () => timeouts.forEach(clearTimeout);
+    return () => {
+      window.removeEventListener('keydown', skip);
+      timeouts.forEach(clearTimeout);
+    };
   }, [onComplete]);
 
   const current = STAGES[Math.min(stage, STAGES.length - 1)];
@@ -44,7 +55,7 @@ export default function BootScreen({ onComplete }) {
     <div style={{
       position: 'fixed', inset: 0, zIndex: 9999, background: '#000',
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      fontFamily: 'var(--font-pixel)', fontSize: '9px',
+      fontFamily: 'var(--font-sys)', fontSize: '13px',
     }}>
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
@@ -52,8 +63,7 @@ export default function BootScreen({ onComplete }) {
         </div>
         <div style={{ color: '#c8c8c8', letterSpacing: '3px', marginBottom: '4px' }}>Portfolio</div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', justifyContent: 'center' }}>
-          <span style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px' }}>Shell</span>
-          <span style={{ color: '#fff', fontSize: '16px', fontStyle: 'italic', opacity: 0.9 }}>OS</span>
+          <span style={{ color: '#fff', fontSize: '22px', fontWeight: 'bold', letterSpacing: '1px' }}>Shell OS</span>
         </div>
         <p style={{ color: '#606060', marginTop: '10px', letterSpacing: '1px' }}>Personal Edition</p>
       </div>
@@ -79,11 +89,20 @@ export default function BootScreen({ onComplete }) {
       </div>
 
       <p style={{
-        position: 'absolute', bottom: '48px', color: '#505050',
+        position: 'absolute', bottom: '72px', color: '#505050',
         fontFamily: 'var(--font-sys)', fontSize: '12px', textAlign: 'center',
       }}>
         {tip}
       </p>
+
+      <button
+        type="button"
+        className="win95-btn"
+        onClick={onComplete}
+        style={{ position: 'absolute', bottom: '44px' }}
+      >
+        Skip
+      </button>
 
       <div style={{
         position: 'absolute', bottom: '16px', color: '#404040',

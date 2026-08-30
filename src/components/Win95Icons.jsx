@@ -140,7 +140,7 @@ export function FolderIcon({ size = 32 }) {
   );
 }
 
-// ── Envelope — Contact ───────────────────────────────────────────────────────
+// ── Envelope — Inbox ─────────────────────────────────────────────────────────
 export function EnvelopeIcon({ size = 32 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" style={P}>
@@ -383,7 +383,7 @@ export function Connect4Icon({ size = 32 }) {
   );
 }
 
-// ── Book — Books.app ─────────────────────────────────────────────────────────
+// ── Book — Books ─────────────────────────────────────────────────────────────
 export function BookIcon({ size = 32 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" style={P}>

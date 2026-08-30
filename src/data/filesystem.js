@@ -1,5 +1,5 @@
 // ============================================================
-// EDIT THIS FILE to customize the Finder.app file system
+// EDIT THIS FILE to customize the My Computer file system
 // ============================================================
 
 import { projects, bio, skills, person } from './portfolio';
@@ -11,10 +11,10 @@ function skillsText() {
 }
 
 // Each node: { name, type: 'folder'|'file', children?, content?, projectId? }
-// projectId links a file to a projects entry so Finder can render a project card.
+// projectId links a file to a projects entry so My Computer can render a project card.
 
 export const filesystem = {
-  name: '~',
+  name: 'C:',
   type: 'folder',
   children: [
     {
@@ -69,7 +69,7 @@ There's something really fun about seeing something you made come to life on you
       ],
     },
     {
-      name: 'Contact',
+      name: 'Inbox',
       type: 'folder',
       children: [
         {

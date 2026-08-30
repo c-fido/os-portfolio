@@ -95,14 +95,14 @@ function EmptyTab({ tab }) {
   if (tab === 'reading') {
     return (
       <p style={{ margin: 0, color: '#444' }}>
-        Nothing on the shelf right now. Set <code>is_reading</code> to true in Supabase.
+        Nothing on the shelf right now.
       </p>
     );
   }
 
   return (
     <p style={{ margin: 0, color: '#444' }}>
-      No top 10 yet. Set <code>top_rank</code> from 1–10 in Supabase.
+      No ranked favorites yet.
     </p>
   );
 }
@@ -148,35 +148,9 @@ export default function Books() {
   );
 
   const visibleBooks = activeTab === 'reading' ? readingBooks : top10Books;
-  const statusText = loading
-    ? 'Loading...'
-    : error
-      ? 'Error'
-      : `${visibleBooks.length} item${visibleBooks.length === 1 ? '' : 's'}`;
 
   return (
-    <div className="win95-app" style={{ height: '100%', display: 'flex', flexDirection: 'column', background: '#c0c0c0' }}>
-      <div
-        className="win95-app-toolbar"
-        style={{
-          display: 'flex', alignItems: 'center', gap: '8px',
-          padding: '3px 6px', borderBottom: '1px solid #808080', flexShrink: 0,
-        }}
-      >
-        {['File', 'View', 'Help'].map(m => (
-          <button
-            key={m}
-            style={{ background: 'none', border: 'none', cursor: 'default', padding: '2px 6px', color: '#000' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#000080'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#000'; }}
-          >
-            {m}
-          </button>
-        ))}
-        <div style={{ flex: 1 }} />
-        <span style={{ color: '#808080' }}>{statusText}</span>
-      </div>
-
+    <div className="win95-app" style={{ height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--color-surface)' }}>
       <div className="books-tabs" role="tablist">
         {TABS.map(tab => {
           const isActive = activeTab === tab.id;
@@ -208,8 +182,10 @@ export default function Books() {
         {!loading && error && (
           <div style={{ padding: '12px', background: '#ffffe0', border: '1px solid #808080' }}>
             <strong>Could not load books</strong>
-            <p style={{ margin: '8px 0 0', color: '#222' }}>{error}</p>
-            {!isBooksConfigured() && (
+            <p style={{ margin: '8px 0 0', color: '#222' }}>
+              {import.meta.env.DEV ? error : 'Try again later.'}
+            </p>
+            {!isBooksConfigured() && import.meta.env.DEV && (
               <p style={{ margin: '8px 0 0', color: '#444', fontSize: 'var(--text-xs)' }}>
                 Create a <code>.env</code> file with <code>VITE_SUPABASE_URL</code> and{' '}
                 <code>VITE_SUPABASE_ANON_KEY</code>, then restart the dev server.

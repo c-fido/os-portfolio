@@ -7,10 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Pixel font for all chrome (titles, labels, buttons)
-        pixel: ['"Press Start 2P"', '"MS Sans Serif"', 'monospace'],
-        // System font for readable body content
-        sans:  ['"MS Sans Serif"', '"Microsoft Sans Serif"', 'Arial', 'sans-serif'],
+        sans:  ['Tahoma', '"MS Sans Serif"', '"Segoe UI"', 'Arial', 'sans-serif'],
         mono:  ['"Courier New"', 'Courier', 'monospace'],
       },
       colors: {

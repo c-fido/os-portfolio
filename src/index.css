@@ -19,7 +19,6 @@
   --color-border-dark:    #808080;
   --color-border-darker:  #000000;
   --color-scrollbar:      #c0c0c0;
-  --font-pixel: "Press Start 2P", "MS Sans Serif", monospace;
   --font-sys:   Tahoma, "MS Sans Serif", "Segoe UI", Arial, sans-serif;
   --font-mono:  "Courier New", Courier, monospace;
   --text-sm:    11px;
@@ -47,6 +46,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.win95-content,
+.text-prose,
+.win95-input,
+input,
+textarea,
+pre {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
 #root {
   width: 100vw;
   height: 100vh;
@@ -54,14 +63,6 @@ body {
 }
 
 /* ── Typography utilities ───────────────────────────────────────────── */
-.font-pixel {
-  font-family: var(--font-pixel);
-  font-size: 9px;
-  line-height: 1.5;
-  -webkit-font-smoothing: none;
-  font-smooth: never;
-}
-
 .font-sys {
   font-family: var(--font-sys);
 }
@@ -80,8 +81,8 @@ body {
 }
 
 .win95-app-toolbar {
-  font-family: var(--font-pixel);
-  font-size: 9px;
+  font-family: var(--font-sys);
+  font-size: var(--text-sm);
   line-height: 1.5;
 }
 
@@ -102,12 +103,6 @@ body {
 /* ── Desktop wallpaper ──────────────────────────────────────────────── */
 .desktop-wallpaper {
   background-color: var(--color-desktop);
-  background-image:
-    radial-gradient(ellipse 120px 80px at 15% 20%, rgba(255,255,255,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 160px 100px at 75% 15%, rgba(255,255,255,0.10) 0%, transparent 70%),
-    radial-gradient(ellipse 100px 70px at 85% 60%, rgba(255,255,255,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 140px 90px at 30% 75%, rgba(255,255,255,0.09) 0%, transparent 70%),
-    linear-gradient(160deg, var(--color-desktop-light) 0%, var(--color-desktop) 45%, #006868 100%);
 }
 
 /* ── Pixel rendering for icons & games ──────────────────────────────── */
@@ -354,17 +349,15 @@ img, canvas, svg {
 
 .win95-icon-label {
   color: #ffffff;
-  font-family: var(--font-pixel);
-  font-size: 8px;
-  -webkit-font-smoothing: none;
-  font-smooth: never;
-  text-shadow: 1px 1px 0 #000000, -1px 0 0 #000000, 0 -1px 0 #000000;
+  font-family: var(--font-sys);
+  font-size: var(--text-xs);
+  text-shadow: 1px 1px 0 #000000;
   text-align: center;
-  line-height: 1.55;
+  line-height: 1.3;
   overflow-wrap: normal;
   word-break: normal;
   white-space: normal;
-  max-width: 84px;
+  max-width: 96px;
 }
 
 /* ── Desktop sticky note (fun element) ────────────────────────────────── */
@@ -444,8 +437,8 @@ img, canvas, svg {
   padding: 6px 10px;
   background: #1a1a2e;
   border-bottom: 2px solid #00ff41;
-  font-family: var(--font-pixel);
-  font-size: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: #00ff41;
   flex-shrink: 0;
 }
@@ -482,12 +475,12 @@ img, canvas, svg {
   gap: 14px;
   background: rgba(0,0,0,0.82);
   z-index: 10;
-  font-family: var(--font-pixel);
+  font-family: var(--font-mono);
 }
 
 .snake-overlay h2 {
   margin: 0;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: bold;
 }
 

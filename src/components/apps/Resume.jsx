@@ -20,17 +20,6 @@ export default function Resume() {
           <button className="win95-btn" style={{ minWidth: 'auto', padding: '3px 12px' }} onClick={handleDownload}>
             Download
           </button>
-          <div style={{ width: '2px', height: '20px', borderLeft: '1px solid #808080', borderRight: '1px solid #fff' }} />
-          {['File', 'View', 'Help'].map(m => (
-            <button
-              key={m}
-              style={{ background: 'none', border: 'none', cursor: 'default', padding: '2px 6px', color: '#000' }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#000080'; e.currentTarget.style.color = '#fff'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#000'; }}
-            >
-              {m}
-            </button>
-          ))}
         </div>
         <span style={{ color: '#808080' }}>Giancarlo Fedolfi Resume.pdf</span>
       </div>

@@ -91,7 +91,7 @@ export default function Snake({ onTitleChange }) {
     const hs = Math.max(finalScore, parseInt(localStorage.getItem('snake-hs') || '0', 10));
     localStorage.setItem('snake-hs', String(hs));
     setHighScore(hs);
-    onTitleChange?.('Snake.app');
+    onTitleChange?.('Snake');
     drawFrame();
   }, [drawFrame, onTitleChange]);
 
@@ -124,7 +124,7 @@ export default function Snake({ onTitleChange }) {
           s.food = randPos(s.snake);
           s.speed = Math.max(MIN_SPEED, s.speed - SPEED_STEP);
           setScore(s.score);
-          onTitleChange?.(`Snake.app — Score: ${s.score}`);
+          onTitleChange?.(`Snake — Score: ${s.score}`);
         }
       }
 
@@ -139,7 +139,7 @@ export default function Snake({ onTitleChange }) {
     phaseRef.current = 'playing';
     setPhase('playing');
     setScore(0);
-    onTitleChange?.('Snake.app — Score: 0');
+    onTitleChange?.('Snake — Score: 0');
     rafRef.current = requestAnimationFrame(ts => tickFnRef.current(ts));
   }, [onTitleChange]);
 
@@ -225,7 +225,7 @@ export default function Snake({ onTitleChange }) {
           <div className="snake-overlay">
             <h2 style={{ color: '#00ff41' }}>SNAKE</h2>
             <p style={{ color: '#888' }}>Arrow keys or WASD to move</p>
-            <button className="win95-btn" onClick={startGame} style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>Play</button>
+            <button className="win95-btn" onClick={startGame} style={{ fontFamily: 'var(--font-sys)' }}>Play</button>
             {highScore > 0 && <p style={{ color: '#666' }}>Best: {highScore}</p>}
           </div>
         )}
@@ -234,7 +234,7 @@ export default function Snake({ onTitleChange }) {
           <div className="snake-overlay">
             <h2 style={{ color: '#fff' }}>PAUSED</h2>
             <p style={{ color: '#888' }}>Score: {score}</p>
-            <button className="win95-btn" onClick={resumeGame} style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>Resume</button>
+            <button className="win95-btn" onClick={resumeGame} style={{ fontFamily: 'var(--font-sys)' }}>Resume</button>
           </div>
         )}
 
@@ -243,7 +243,7 @@ export default function Snake({ onTitleChange }) {
             <h2 style={{ color: '#ff3355' }}>GAME OVER</h2>
             <p>Score: <strong style={{ color: '#ffff00' }}>{score}</strong></p>
             <p style={{ color: '#666' }}>Best: {highScore}</p>
-            <button className="win95-btn" onClick={startGame} style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px' }}>Play Again</button>
+            <button className="win95-btn" onClick={startGame} style={{ fontFamily: 'var(--font-sys)' }}>Play Again</button>
             <p style={{ color: '#444', fontSize: 'var(--text-xs)' }}>Press any key to restart</p>
           </div>
         )}

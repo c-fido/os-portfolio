@@ -2,7 +2,7 @@ import { useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppIcon } from './Win95Icons';
 
-const TITLEBAR_HEIGHT = 18;
+const TITLEBAR_HEIGHT = 20;
 const MIN_WIDTH = 320;
 const MIN_HEIGHT = 200;
 
@@ -29,6 +29,20 @@ function MaximizeGlyph() {
       <rect x="0" y="0" width="1" height="9" fill="#000000" />
       <rect x="8" y="0" width="1" height="9" fill="#000000" />
       <rect x="0" y="8" width="9" height="1" fill="#000000" />
+    </svg>
+  );
+}
+function RestoreGlyph() {
+  return (
+    <svg width="9" height="9" viewBox="0 0 9 9" style={G}>
+      <rect x="2" y="0" width="7" height="2" fill="#000000" />
+      <rect x="2" y="0" width="1" height="6" fill="#000000" />
+      <rect x="8" y="0" width="1" height="6" fill="#000000" />
+      <rect x="2" y="5" width="7" height="1" fill="#000000" />
+      <rect x="0" y="3" width="6" height="2" fill="#000000" />
+      <rect x="0" y="3" width="1" height="6" fill="#000000" />
+      <rect x="5" y="3" width="1" height="6" fill="#000000" />
+      <rect x="0" y="8" width="6" height="1" fill="#000000" />
     </svg>
   );
 }
@@ -80,8 +94,8 @@ function ChromeButton({ label, onClick, title }) {
         border: 'none',
         padding: 0,
         cursor: 'default',
-        fontSize: '9px',
-        fontFamily: '"Press Start 2P", monospace',
+        fontFamily: 'var(--font-sys)',
+        fontSize: '11px',
         fontWeight: 'bold',
         lineHeight: '1',
         display: 'flex',
@@ -97,8 +111,8 @@ function ChromeButton({ label, onClick, title }) {
 }
 
 export default function Window({
-  id, title, icon, x, y, width, height, zIndex, minimized, isActive,
-  onClose, onMinimize, onFocus, onMove, onResize,
+  id, title, x, y, width, height, zIndex, minimized, maximized, isActive,
+  onClose, onMinimize, onMaximize, onFocus, onMove, onResize,
   children,
 }) {
   const dragState = useRef(null);
@@ -198,8 +212,8 @@ export default function Window({
           // Win95 outer window border
           boxShadow: 'inset -1px -1px 0 #000000, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf',
           border: '1px solid #000000',
-          fontFamily: '"Press Start 2P", "MS Sans Serif", monospace',
-          fontSize: '8px',
+          fontFamily: 'var(--font-sys)',
+          fontSize: '11px',
         }}
         onMouseDown={() => onFocus(id)}
         onContextMenu={e => e.stopPropagation()}
@@ -220,6 +234,10 @@ export default function Window({
           }}
           onMouseDown={handleTitleBarMouseDown}
           onTouchStart={handleTitleBarTouchStart}
+          onDoubleClick={(e) => {
+            if (e.target.closest('.win95-chrome-btn')) return;
+            onMaximize?.(id);
+          }}
         >
           {/* App icon */}
           <span style={{ width: '14px', height: '14px', flexShrink: 0, imageRendering: 'pixelated' }}>
@@ -230,8 +248,8 @@ export default function Window({
           <span style={{
             flex: 1,
             color: '#ffffff',
-            fontFamily: '"Press Start 2P", "MS Sans Serif", monospace',
-            fontSize: '8px',
+            fontFamily: 'var(--font-sys)',
+            fontSize: '11px',
             fontWeight: 'bold',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
@@ -245,7 +263,11 @@ export default function Window({
           {/* Chrome buttons */}
           <div className="win95-chrome-btn" style={{ display: 'flex', gap: '2px', flexShrink: 0 }}>
             <ChromeButton label={<MinimizeGlyph />} title="Minimize" onClick={() => onMinimize(id)} />
-            <ChromeButton label={<MaximizeGlyph />} title="Maximize" onClick={() => {}} />
+            <ChromeButton
+              label={maximized ? <RestoreGlyph /> : <MaximizeGlyph />}
+              title={maximized ? 'Restore' : 'Maximize'}
+              onClick={() => onMaximize?.(id)}
+            />
             <ChromeButton label={<CloseGlyph />}    title="Close"    onClick={() => onClose(id)} />
           </div>
         </div>
@@ -256,18 +278,20 @@ export default function Window({
         </div>
 
         {/* ── Resize handle (invisible, cursor only) ── */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            width: '8px',
-            height: '8px',
-            cursor: 'se-resize',
-            zIndex: 10,
-          }}
-          onMouseDown={handleResizeMouseDown}
-        />
+        {!maximized && (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              width: '8px',
+              height: '8px',
+              cursor: 'se-resize',
+              zIndex: 10,
+            }}
+            onMouseDown={handleResizeMouseDown}
+          />
+        )}
       </motion.div>
     </AnimatePresence>
   );

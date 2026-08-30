@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { person, skills, projects } from '../../data/portfolio';
 
 const PROMPT = `C:\\PORTFOLIO>`;
-const TERM_FONT = '11px';
+const TERM_FONT = '13px';
 const SHELL_NAME = 'Portfolio Shell';
 const SHELL_VERSION = '1.00';
 const BOOT_BANNER = [
@@ -37,7 +37,7 @@ Location: ${person.location}
 
 I'm a Computer Science & German student at Wesleyan University (Class of 2027) based in Connecticut. I enjoy building things, from web apps and terminal games to bioinformatics pipelines.
 
-Currently building Remindr (CLI reminder tool + web sync at remindr.gfedolfi.dev), doing bioinformatics research, and additive manufacturing simulation work at Wesleyan.
+Currently working on SolverRL (PPO teacher → SWI-Prolog decision lists), Remindr (offline-first reminders at remindr.gfedolfi.dev), bioinformatics research, and additive manufacturing simulation at Wesleyan.
 
 Type SKILLS, PROJECTS, or CONTACT for more info.
 `.trim(),
@@ -72,7 +72,7 @@ Contact ${person.name}:
   GitHub    ${person.github}
   Website   ${person.website}
 
-Or open Contact.exe from the desktop.
+Or open Inbox from the desktop.
 `.trim(),
 
   hire: () => `
@@ -164,7 +164,7 @@ export default function Terminal() {
         display: 'flex',
         flexDirection: 'column',
         background: '#000000',
-        fontFamily: '"Press Start 2P", monospace',
+        fontFamily: 'var(--font-mono)',
         fontSize: TERM_FONT,
         cursor: 'text',
         color: '#c0c0c0',
@@ -209,7 +209,7 @@ export default function Terminal() {
         borderTop: '1px solid #404040',
         background: '#000000',
       }}>
-        <span style={{ color: '#c0c0c0', flexShrink: 0, fontFamily: '"Press Start 2P", monospace', fontSize: TERM_FONT }}>
+        <span style={{ color: '#c0c0c0', flexShrink: 0, fontFamily: 'var(--font-mono)', fontSize: TERM_FONT }}>
           {PROMPT}
         </span>
         <input
@@ -223,7 +223,7 @@ export default function Terminal() {
             border: 'none',
             outline: 'none',
             color: '#ffffff',
-            fontFamily: '"Press Start 2P", monospace',
+            fontFamily: 'var(--font-mono)',
             fontSize: TERM_FONT,
             caret: 'block',
             caretColor: '#c0c0c0',
@@ -234,7 +234,7 @@ export default function Terminal() {
           autoComplete="off"
           autoCorrect="off"
         />
-        <span className="terminal-cursor" style={{ color: '#c0c0c0', fontFamily: '"Press Start 2P", monospace', fontSize: TERM_FONT }}>█</span>
+        <span className="terminal-cursor" style={{ color: '#c0c0c0', fontFamily: 'var(--font-mono)', fontSize: TERM_FONT }}>█</span>
       </div>
     </div>
   );

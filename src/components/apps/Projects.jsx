@@ -50,25 +50,7 @@ function ProjectCard({ project }) {
 
 export default function Projects() {
   return (
-    <div className="win95-app" style={{ height: '100%', display: 'flex', flexDirection: 'column', background: '#c0c0c0' }}>
-      <div className="win95-app-toolbar" style={{
-        display: 'flex', alignItems: 'center', gap: '8px',
-        padding: '3px 6px', borderBottom: '1px solid #808080', flexShrink: 0,
-      }}>
-        {['File', 'View', 'Help'].map(m => (
-          <button
-            key={m}
-            style={{ background: 'none', border: 'none', cursor: 'default', padding: '2px 6px', color: '#000' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#000080'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#000'; }}
-          >
-            {m}
-          </button>
-        ))}
-        <div style={{ flex: 1 }} />
-        <span style={{ color: '#808080' }}>{projects.length} items</span>
-      </div>
-
+    <div className="win95-app" style={{ height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--color-surface)' }}>
       <div
         className="os-scrollbar win95-content"
         style={{
@@ -79,7 +61,7 @@ export default function Projects() {
       >
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))',
           gap: '10px',
         }}>
           {projects.map(project => (

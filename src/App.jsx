@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import BootScreen from './components/BootScreen';
 import Desktop from './components/Desktop';
 import MobileLayout from './components/MobileLayout';
+import { markBooted, shouldSkipBoot } from './lib/apps';
 
 function useIsMobile() {
   const [mobile, setMobile] = useState(() => window.innerWidth < 768);
@@ -14,9 +15,12 @@ function useIsMobile() {
 }
 
 export default function App() {
-  const [booted, setBooted] = useState(false);
+  const [booted, setBooted] = useState(() => shouldSkipBoot());
   const isMobile = useIsMobile();
-  const handleBootComplete = useCallback(() => setBooted(true), []);
+  const handleBootComplete = useCallback(() => {
+    markBooted();
+    setBooted(true);
+  }, []);
 
   return (
     <>

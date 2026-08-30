@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { PortfolioLogo, AppIcon } from './Win95Icons';
+import { AppIcon } from './Win95Icons';
+import StartCluster from './StartCluster';
 
 function Clock() {
   const [time, setTime] = useState(new Date());
@@ -16,7 +17,7 @@ function Clock() {
         padding: '2px 8px',
         fontSize: 'var(--text-xs)',
         fontFamily: 'var(--font-sys)',
-        color: '#000',
+        color: 'var(--color-text)',
         boxShadow: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #fff',
         whiteSpace: 'nowrap',
         lineHeight: '20px',
@@ -26,39 +27,6 @@ function Clock() {
     >
       {timeStr}
     </div>
-  );
-}
-
-function StartButton() {
-  const [pressed, setPressed] = useState(false);
-
-  return (
-    <button
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-      onMouseLeave={() => setPressed(false)}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
-        height: '22px',
-        padding: pressed ? '4px 10px 2px 12px' : '3px 11px 3px 11px',
-        background: '#c0c0c0',
-        border: 'none',
-        cursor: 'default',
-        fontFamily: 'var(--font-pixel)',
-        fontSize: '9px',
-        fontWeight: 'bold',
-        color: '#000000',
-        flexShrink: 0,
-        boxShadow: pressed
-          ? 'inset 1px 1px 0 #000000, inset -1px -1px 0 #ffffff, inset 2px 2px 0 #808080, inset -2px -2px 0 #dfdfdf'
-          : 'inset -1px -1px 0 #000000, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf',
-      }}
-    >
-      <PortfolioLogo size={14} />
-      <span>Start</span>
-    </button>
   );
 }
 
@@ -87,12 +55,12 @@ function TaskbarButton({ win, isActive, onFocus, onMinimize }) {
         gap: '4px',
         height: '22px',
         padding: showPressed ? '4px 7px 2px 9px' : '3px 8px',
-        background: '#c0c0c0',
+        background: 'var(--color-surface)',
         border: 'none',
         cursor: 'default',
-        fontFamily: 'var(--font-pixel)',
-        fontSize: '9px',
-        color: '#000000',
+        fontFamily: 'var(--font-sys)',
+        fontSize: '11px',
+        color: 'var(--color-text)',
         maxWidth: '160px',
         minWidth: '100px',
         flexShrink: 0,
@@ -103,8 +71,8 @@ function TaskbarButton({ win, isActive, onFocus, onMinimize }) {
       }}
     >
       <span style={{ width: '12px', height: '12px', flexShrink: 0, imageRendering: 'pixelated' }}>
-          <AppIcon id={win.id} size={12} />
-        </span>
+        <AppIcon id={win.id} size={12} />
+      </span>
       <span style={{
         overflow: 'hidden',
         whiteSpace: 'nowrap',
@@ -118,7 +86,7 @@ function TaskbarButton({ win, isActive, onFocus, onMinimize }) {
   );
 }
 
-export default function Taskbar({ windows, configs, openWindow, focusWindow, minimizeWindow, maxZ }) {
+export default function Taskbar({ windows, openWindow, focusWindow, minimizeWindow, maxZ }) {
   const openWins = Object.values(windows).filter(Boolean);
 
   return (
@@ -129,32 +97,29 @@ export default function Taskbar({ windows, configs, openWindow, focusWindow, min
         left: 0,
         right: 0,
         height: '28px',
-        background: '#c0c0c0',
-        borderTop: '1px solid #ffffff',
-        borderBottom: '1px solid #808080',
+        background: 'var(--color-surface)',
+        borderTop: '1px solid var(--color-border-light)',
+        borderBottom: '1px solid var(--color-border-dark)',
         zIndex: 9000,
         display: 'flex',
         alignItems: 'center',
         gap: '4px',
         padding: '3px 4px',
         boxShadow: 'inset 0 1px 0 #ffffff',
-        fontFamily: '"Press Start 2P", "MS Sans Serif", monospace',
+        fontFamily: 'var(--font-sys)',
       }}
     >
-      {/* Start button */}
-      <StartButton />
+      <StartCluster onOpen={openWindow} />
 
-      {/* Separator */}
       <div style={{
         width: '2px',
         height: '20px',
-        borderLeft: '1px solid #808080',
-        borderRight: '1px solid #ffffff',
+        borderLeft: '1px solid var(--color-border-dark)',
+        borderRight: '1px solid var(--color-border-light)',
         flexShrink: 0,
         marginRight: '2px',
       }} />
 
-      {/* Open window buttons */}
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '4px', overflow: 'hidden' }}>
         {openWins.map(win => (
           <TaskbarButton
@@ -167,27 +132,18 @@ export default function Taskbar({ windows, configs, openWindow, focusWindow, min
         ))}
       </div>
 
-      {/* System tray area */}
       <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
         flexShrink: 0,
         marginLeft: '4px',
+        borderLeft: '1px solid var(--color-border-dark)',
+        borderTop: '1px solid var(--color-border-dark)',
+        padding: '2px 6px',
+        display: 'flex',
+        alignItems: 'center',
+        boxShadow: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff',
+        height: '22px',
       }}>
-        <div style={{
-          borderLeft: '1px solid #808080',
-          borderTop: '1px solid #808080',
-          padding: '2px 6px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          boxShadow: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff',
-          height: '22px',
-        }}>
-          <span style={{ fontFamily: 'var(--font-pixel)', fontSize: '8px', color: '#000' }}>Vol</span>
-          <Clock />
-        </div>
+        <Clock />
       </div>
     </div>
   );
