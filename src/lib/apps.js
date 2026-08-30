@@ -29,6 +29,8 @@ export const START_MENU_ITEMS = [
   { id: 'minesweeper', label: 'Minesweeper' },
   { id: 'snake', label: 'Snake' },
   { id: 'connect4', label: 'Connect Four' },
+  { separator: true },
+  { id: 'restart', label: 'Restart...', restart: true },
 ];
 
 const HASH_ALIASES = {
@@ -58,15 +60,10 @@ export function setAppHash(id) {
 const BOOT_KEY = 'portfolio-os-booted';
 
 export function shouldSkipBoot() {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined') return true;
   if (getHashApp()) return true;
-  try {
-    if (window.localStorage.getItem(BOOT_KEY) === '1') return true;
-  } catch {
-    /* private mode */
-  }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
-  return false;
+  return new URLSearchParams(window.location.search).get('boot') !== '1';
 }
 
 export function markBooted() {

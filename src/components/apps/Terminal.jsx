@@ -35,9 +35,9 @@ Type any command and press Enter.
 ${person.name} -- ${person.title}
 Location: ${person.location}
 
-I'm a Computer Science & German student at Wesleyan University (Class of 2027) based in Connecticut. I enjoy building things, from web apps and terminal games to bioinformatics pipelines.
-
-Currently working on SolverRL (PPO teacher → SWI-Prolog decision lists), Remindr (offline-first reminders at remindr.gfedolfi.dev), bioinformatics research, and additive manufacturing simulation at Wesleyan.
+SWE intern at turingpoint (Hamburg). I ship systems in C++ and Go —
+Remindr is live at remindr.gfedolfi.dev. Also a research assistant in
+bioinformatics and additive manufacturing at Wesleyan.
 
 Type SKILLS, PROJECTS, or CONTACT for more info.
 `.trim(),
@@ -57,11 +57,12 @@ Type SKILLS, PROJECTS, or CONTACT for more info.
   },
 
   projects: () => {
-    const lines = projects.map((p, i) => {
+    const listed = projects.filter(p => p.featured);
+    const lines = listed.map((p, i) => {
       const link = p.demo ? `  ${p.demo}` : p.github ? `  ${p.github}` : '';
       return `  ${String(i + 1).padStart(2, '0')}  ${p.title.padEnd(22)} ${p.tags.slice(0, 2).join(', ')}${link ? '\n' + link : ''}`;
     });
-    return `Directory of PROJECTS\n${lines.join('\n')}\n       ${projects.length} file(s)`;
+    return `Directory of PROJECTS\n${lines.join('\n')}\n       ${listed.length} file(s)`;
   },
 
   contact: () => `

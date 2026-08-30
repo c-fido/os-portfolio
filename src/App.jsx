@@ -21,11 +21,16 @@ export default function App() {
     markBooted();
     setBooted(true);
   }, []);
+  const handleRestart = useCallback(() => {
+    setBooted(false);
+  }, []);
 
   return (
     <>
       {!booted && <BootScreen onComplete={handleBootComplete} />}
-      {booted && (isMobile ? <MobileLayout /> : <Desktop />)}
+      {booted && (isMobile
+        ? <MobileLayout onRestart={handleRestart} />
+        : <Desktop onRestart={handleRestart} />)}
     </>
   );
 }

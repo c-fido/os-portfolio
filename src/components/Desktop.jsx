@@ -32,27 +32,19 @@ const APP_COMPONENTS = {
 };
 
 const PORTFOLIO_ICONS = [
-  { id: 'about',    label: 'About.txt'      },
   { id: 'resume',   label: 'Resume.pdf'     },
   { id: 'projects', label: 'Projects'       },
-  { id: 'books',    label: 'Books'          },
   { id: 'contact',  label: 'Inbox'          },
+  { id: 'about',    label: 'About.txt'      },
+  { id: 'books',    label: 'Books'          },
   { id: 'terminal', label: 'MS-DOS Prompt'  },
   { id: 'finder',   label: 'My Computer'    },
 ];
 
-const GAME_ICONS = [
-  { id: 'minesweeper', label: 'Minesweeper'  },
-  { id: 'snake',       label: 'Snake'        },
-  { id: 'connect4',    label: 'Connect Four' },
-];
-
 const STICKY_TIPS = [
-  'Click icons to open apps',
-  'Try MS-DOS Prompt — type HELP',
-  'Can you beat the Connect Four bot?',
-  'Right-click the desktop for shortcuts',
-  'Play Snake for a high score challenge',
+  'Resume.pdf and Projects are already open',
+  'Inbox copies my email in one click',
+  'MS-DOS Prompt — type HELP',
 ];
 
 function DesktopIcon({ id, label, onOpen }) {
@@ -102,7 +94,7 @@ function StickyNote() {
   );
 }
 
-export default function Desktop() {
+export default function Desktop({ onRestart }) {
   const [contextMenu, setContextMenu] = useState(null);
   const didInit = useRef(false);
   const {
@@ -133,8 +125,9 @@ export default function Desktop() {
       if (id) {
         openWindow(id);
       } else {
-        openWindow('about');
-        setAppHash('about');
+        openWindow('resume');
+        openWindow('projects');
+        setAppHash('projects');
       }
     }
 
@@ -150,9 +143,8 @@ export default function Desktop() {
   const closeContextMenu = useCallback(() => setContextMenu(null), []);
 
   const contextItems = [
-    { label: 'Open Projects', action: () => openApp('projects') },
-    { label: 'Open About.txt', action: () => openApp('about') },
     { label: 'Open Resume.pdf', action: () => openApp('resume') },
+    { label: 'Open Projects', action: () => openApp('projects') },
     { label: 'Open Inbox', action: () => openApp('contact') },
     { separator: true },
     { label: 'Minesweeper', action: () => openApp('minesweeper') },
@@ -180,17 +172,6 @@ export default function Desktop() {
       <div className="desktop-icon-grid">
         <div className="desktop-icon-col">
           {PORTFOLIO_ICONS.map(item => (
-            <DesktopIcon
-              key={item.id}
-              id={item.id}
-              label={item.label}
-              onOpen={() => openApp(item.id)}
-            />
-          ))}
-        </div>
-        <div />
-        <div className="desktop-icon-col desktop-icon-col--right">
-          {GAME_ICONS.map(item => (
             <DesktopIcon
               key={item.id}
               id={item.id}
@@ -235,6 +216,7 @@ export default function Desktop() {
         focusWindow={focusApp}
         minimizeWindow={minimizeWindow}
         maxZ={maxZ}
+        onRestart={onRestart}
       />
 
       {contextMenu && (

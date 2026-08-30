@@ -86,7 +86,7 @@ function TaskbarButton({ win, isActive, onFocus, onMinimize }) {
   );
 }
 
-export default function Taskbar({ windows, openWindow, focusWindow, minimizeWindow, maxZ }) {
+export default function Taskbar({ windows, openWindow, focusWindow, minimizeWindow, maxZ, onRestart }) {
   const openWins = Object.values(windows).filter(Boolean);
 
   return (
@@ -109,7 +109,7 @@ export default function Taskbar({ windows, openWindow, focusWindow, minimizeWind
         fontFamily: 'var(--font-sys)',
       }}
     >
-      <StartCluster onOpen={openWindow} />
+      <StartCluster onOpen={openWindow} onRestart={onRestart} />
 
       <div style={{
         width: '2px',

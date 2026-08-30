@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { PortfolioLogo } from './Win95Icons';
 import StartMenu from './StartMenu';
 
-export default function StartCluster({ onOpen, compact = false }) {
+export default function StartCluster({ onOpen, onRestart, compact = false }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
 
@@ -60,6 +60,7 @@ export default function StartCluster({ onOpen, compact = false }) {
       {open && (
         <StartMenu
           onOpen={onOpen}
+          onRestart={onRestart}
           onClose={() => setOpen(false)}
         />
       )}

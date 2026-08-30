@@ -34,7 +34,9 @@ function clampPosition(x, y, width) {
 }
 
 function getInitialPosition(id, width, height) {
-  const offsets = { projects: 0, about: 1, resume: 2, terminal: 3, contact: 4, books: 5, minesweeper: 6, connect4: 7, snake: 8, finder: 9 };
+  if (id === 'resume') return clampPosition(36, 28, width);
+  if (id === 'projects') return clampPosition(76, 68, width);
+  const offsets = { about: 1, terminal: 3, contact: 4, books: 5, minesweeper: 6, connect4: 7, snake: 8, finder: 9 };
   const offset = (offsets[id] ?? 0) * 30;
   const x = Math.max(60, (window.innerWidth - width) / 2 + offset);
   const y = Math.max(40, (window.innerHeight - height) / 2 + offset - 40);

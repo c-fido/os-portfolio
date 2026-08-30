@@ -29,7 +29,7 @@ const APP_COMPONENTS = {
 
 const PINNED = MOBILE_PINNED;
 
-export default function MobileLayout() {
+export default function MobileLayout({ onRestart }) {
   const [active, setActive] = useState(() => getHashApp() || 'projects');
   const CurrentComponent = APP_COMPONENTS[active];
 
@@ -80,7 +80,7 @@ export default function MobileLayout() {
 
       <div style={{ flexShrink: 0, borderTop: '2px solid var(--color-border-light)', background: 'var(--color-surface)' }}>
         <div className="mobile-tabs" style={{ display: 'flex' }}>
-          <StartCluster compact onOpen={openApp} />
+          <StartCluster compact onOpen={openApp} onRestart={onRestart} />
           {PINNED.map(tab => {
             const isActive = active === tab.id;
             return (

@@ -1,7 +1,7 @@
 import { AppIcon } from './Win95Icons';
 import { START_MENU_ITEMS } from '../lib/apps';
 
-export default function StartMenu({ onOpen, onClose }) {
+export default function StartMenu({ onOpen, onClose, onRestart }) {
   return (
     <div
       role="menu"
@@ -48,7 +48,8 @@ export default function StartMenu({ onOpen, onClose }) {
               role="menuitem"
               type="button"
               onClick={() => {
-                onOpen(item.id);
+                if (item.restart) onRestart?.();
+                else onOpen(item.id);
                 onClose();
               }}
               style={{

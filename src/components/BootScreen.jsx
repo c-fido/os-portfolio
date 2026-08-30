@@ -11,11 +11,9 @@ const STAGES = [
 ];
 
 const BOOT_TIPS = [
-  'Tip: Click desktop icons to open apps',
-  'Tip: Try MS-DOS Prompt — type HELP',
-  'Tip: Can you beat the Connect Four bot?',
-  'Tip: Right-click the desktop for shortcuts',
-  'Tip: Play Snake and set a high score!',
+  'Tip: Resume.pdf and Projects open on the desktop',
+  'Tip: Type HELP in MS-DOS Prompt',
+  'Tip: Hash links: #resume #projects #inbox',
 ];
 
 export default function BootScreen({ onComplete }) {

@@ -4,105 +4,91 @@
 
 export const person = {
   name: "Giancarlo Fedolfi",
-  title: "CS & German Student · Wesleyan University",
+  title: "CS & German · Wesleyan University · Class of 2027",
   location: "Middletown, CT",
-  phone: "+1 (860) 967-6556",
   email: "fedolficarlo@gmail.com",
   github: "https://github.com/c-fido",
   linkedin: "https://www.linkedin.com/in/giancarlo-fedolfi-652026306/",
   website: "https://gfedolfi.dev",
 };
 
-export const bio = `Hi, I'm Giancarlo!
+export const bio = `Hi, I'm Giancarlo.
 
-I'm a Computer Science & German student at Wesleyan
-University (Class of 2027). I interned as a Software
-Engineer at turingpoint GmbH in Hamburg, where I built
-a web-based CVE classification system in Python using
-LiteLLM to route Anthropic API calls.
+Senior at Wesleyan (CS & German, May 2027). SWE intern at
+turingpoint in Hamburg. I build systems in C++ and Go —
+shipped Remindr (offline-first daemon + API + web app) and
+a CVE triage tool used by non-engineers.
 
-I'm a Research Assistant in Wesleyan's Bioinformatics
-lab (genome sequencing pipelines in Python) and the
-Additive Manufacturing lab (heat-dispersion simulation
-with graph theory). Outside the lab I'm captain of
-varsity indoor and outdoor track.
+Research assistant in bioinformatics and additive
+manufacturing. Captain of varsity indoor and outdoor track.
 
-── Currently ──────────────────────────────────
-→ SolverRL — PPO teacher → SWI-Prolog decision lists
-→ Remindr — offline-first reminders (remindr.gfedolfi.dev)
-→ Bioinformatics Research @ Wesleyan University
-→ Additive Manufacturing Research @ Wesleyan University
-→ B.A. Computer Science & German (Expected May 2027)
+── Now ──────────────────────────────────────
+→ Remindr — remindr.gfedolfi.dev
+→ SolverRL — github.com/c-fido/solverRL
+→ Bioinformatics + Additive Manufacturing @ Wesleyan
 
-── Technical Stack ────────────────────────────
-→ Languages: Python, C++, C, Go, JS/TS, SQL, PHP, C#,
-  SMLNJ, GDScript
-→ Frameworks & Tools: React, Go (chi), Django, Node.js,
-  PostgreSQL, Docker, Git, GitHub Actions, MongoDB,
-  Vite, Railway, Vercel, Figma, LiteLLM, BeautifulSoup,
-  JIRA
+── Stack I actually use ─────────────────────
+→ C++17, Go, Python, TypeScript, SQL
+→ React, PostgreSQL, Docker, GitHub Actions
 
-── Education ──────────────────────────────────
-→ GPA: 3.74/4.0 · Dean's List · Scholar-Athlete Honors
-→ Coursework: Software Engineering, Automata Theory,
-  Discrete Mathematics, Logic & Functional Programming,
-  Computational Media (Game Development), Data Structures,
-  Information Security and Privacy
-
-── Links ──────────────────────────────────────
-→ GitHub:   github.com/c-fido
-→ SolverRL: github.com/c-fido/solverRL
-→ Website:  gfedolfi.dev
-→ Remindr:  remindr.gfedolfi.dev
-→ LinkedIn: linkedin.com/in/giancarlo-fedolfi-652026306
-
-Feel free to reach out — I'm always open to interesting
-projects or book recommendations.
+── Links ────────────────────────────────────
+→ GitHub    github.com/c-fido
+→ Remindr   remindr.gfedolfi.dev
+→ LinkedIn  linkedin.com/in/giancarlo-fedolfi-652026306
 
 fedolficarlo@gmail.com`;
 
 export const skills = {
-  languages: ["Python", "C++", "C", "Go", "JavaScript", "TypeScript", "SQL", "PHP", "C#", "SMLNJ", "GDScript"],
-  frameworks: ["React", "Go (chi)", "Django", "Node.js"],
-  tools: ["PostgreSQL", "Docker", "Git", "GitHub Actions", "MongoDB", "Vite", "Railway", "Vercel", "Figma", "LiteLLM", "BeautifulSoup", "JIRA"],
+  languages: ["C++", "Go", "Python", "TypeScript", "JavaScript", "SQL"],
+  frameworks: ["React", "Go (chi)"],
+  tools: ["PostgreSQL", "Docker", "CMake", "Git", "GitHub Actions", "Vite", "Railway", "Vercel"],
 };
 
 export const projects = [
   {
     id: 1,
-    title: "SolverRL",
-    description: "Reproduces a research pipeline that distills a frozen PPO teacher into an executable SWI-Prolog decision list over a finite KeyDoor MDP (~16K reachable states): FOIL-style rule induction in C++, a certified EXPAND loop, MiniGrid DoorKey transfer, and one-command reproduction from checkpoint to metrics.",
-    tags: ["C++17", "Python", "SWI-Prolog", "pybind11"],
-    github: "https://github.com/c-fido/solverRL",
-    demo: null,
-    featured: true,
-  },
-  {
-    id: 2,
     title: "Remindr",
-    description: "Cross-platform desktop reminder daemon (C++17) with offline-first cloud sync: background REST push/pull, Unix-socket IPC, last-write-wins merge, a Go API on PostgreSQL, and a React dashboard deployed with Docker / Railway / Vercel.",
+    description: "Offline-first reminder daemon in C++17 (Unix sockets, background sync) with a Go API on Postgres and a React dashboard. Live at remindr.gfedolfi.dev.",
     tags: ["C++17", "Go", "React", "PostgreSQL"],
     github: "https://github.com/c-fido/Remindr",
     demo: "https://remindr.gfedolfi.dev",
     featured: true,
   },
   {
+    id: 2,
+    title: "SolverRL",
+    description: "C++/Python reproduction of a paper that turns a PPO policy into an executable Prolog program, then only keeps edits that raise exact return. Tests and one-command pipeline on GitHub.",
+    tags: ["C++17", "Python", "SWI-Prolog"],
+    github: "https://github.com/c-fido/solverRL",
+    demo: null,
+    featured: true,
+  },
+  {
     id: 3,
-    title: "TermiTama",
-    description: "A terminal virtual pet in C++17 with FTXUI: FSM lifecycle (Baby → Adult), four stat systems with offline decay capped at 12 hours, genetics with heritable caps, and JSON persistence for a Pet Box of up to 6 pets.",
-    tags: ["C++17", "FTXUI", "CMake"],
-    github: "https://github.com/c-fido/termitama",
+    title: "CVE Triage Agent",
+    description: "Python agent that looks up dependency CVEs (OSV/NVD/GitHub), checks whether your code actually calls the vulnerable path, and writes a severity report. Not just CVSS copy-paste.",
+    tags: ["Python", "Anthropic API"],
+    github: "https://github.com/c-fido/cve-triage-agent",
     demo: null,
     featured: true,
   },
   {
     id: 4,
+    title: "TermiTama",
+    description: "Terminal Tamagotchi in C++17 / FTXUI: lifecycle FSM, offline stat decay, breeding, JSON save.",
+    tags: ["C++17", "FTXUI", "CMake"],
+    github: "https://github.com/c-fido/termitama",
+    demo: null,
+    featured: false,
+  },
+  {
+    id: 5,
     title: "Portfolio OS",
-    description: "This site — a Windows 95-style desktop with draggable windows, MS-DOS Prompt, Minesweeper, Snake, Connect Four, Books, and My Computer.",
+    description: "This site: Win95-style desktop in React.",
     tags: ["React", "Vite", "JavaScript"],
     github: "https://github.com/c-fido/os-portfolio",
     demo: "https://gfedolfi.dev",
-    featured: true,
+    featured: false,
   },
 ];
 
@@ -115,9 +101,9 @@ export const resume = {
       location: "Hamburg, Germany",
       period: "September 2025 – December 2025",
       bullets: [
-        "Built a web-based CVE classification system in Python using LiteLLM to route Anthropic API calls, cutting manual research time by 85%.",
-        "Automated data ingestion by integrating the Brave Search API with BeautifulSoup scraping.",
-        "Designed and iterated on UI/UX mockups in Figma with engineers and product managers to make the tool usable by non-technical reviewers.",
+        "Built a Python CVE classification app (LiteLLM → Anthropic) that non-engineers used to triage findings instead of reading advisories by hand.",
+        "Pulled advisory text via Brave Search + BeautifulSoup so reviewers started from evidence, not a CVSS number.",
+        "Designed Figma flows with PMs so the tool shipped to non-technical reviewers.",
       ],
     },
   ],
@@ -128,9 +114,8 @@ export const resume = {
       location: "Middletown, CT",
       period: "February 2026 – Present",
       bullets: [
-        "Analyzed genome sequencing data to separate species-level genomes using Python and Pandas.",
-        "Built a pipeline to gather data from the web, feeding it into Bakta, Roary, Veryfasttree, then Ecosim to get gene presence/absence trees, replacing a manual process and cutting runtime by half.",
-        "Visualized gene presence/absence trees with Matplotlib.",
+        "Wrote a Python pipeline (Bakta → Roary → VeryFastTree → EcoSim) that replaced a manual gene presence/absence workflow.",
+        "Separated species-level genomes from sequencing data with Pandas; plotted trees in Matplotlib for the lab.",
       ],
     },
     {
@@ -139,39 +124,35 @@ export const resume = {
       location: "Middletown, CT",
       period: "June 2026 – Present",
       bullets: [
-        "Developed a model using graph theory to simulate heat dispersion in a DED metal print.",
-        "Simulated and printed different geometries to test accuracy and calibrate the software.",
+        "Modeled heat spread in a DED metal print as a graph and compared simulated vs printed geometries to calibrate the tool.",
       ],
     },
   ],
   projects: [
     {
-      title: "SolverRL",
-      tags: "C++17, pybind11, Python, SWI-Prolog, Stable-Baselines3, CMake, GoogleTest",
-      period: "August 2026",
-      bullets: [
-        "Reproduced a research pipeline that distills a frozen PPO teacher into an executable SWI-Prolog decision list over a finite KeyDoor MDP (~16K reachable states): reachable-state census, FOIL-style relational rule induction in C++, and first-match Prolog emission with cut semantics.",
-        "Built a certified EXPAND loop in C++ that accepts program edits only when exact discounted return rises (Bellman linear solves over the full model), reports monotone certified-return curves and an advantage-gap certificate vs. the greedy teacher, and targets paper-comparable R1 optimum / R2 recovery from undertrained teachers.",
-        "Extended the same C++ rule-learning core to MiniGrid DoorKey relational transfer (8×8 train → 6×6 / 16×16 eval with unchanged Prolog) and a thin CartPole DAgger honesty baseline; wired pybind11 + pytest/GoogleTest CI and one-command reproduction from checkpoint → census → distill → expand → metrics.",
-      ],
-    },
-    {
       title: "Remindr",
       tags: "C++17, Go, React, PostgreSQL, Docker, GitHub Actions",
       period: "June 2026",
       bullets: [
-        "Extended a cross-platform desktop reminder daemon (C++17) with offline-first cloud sync: background worker pushes/pulls via REST, Unix-socket IPC, and a last-write-wins merge with soft-delete tombstones.",
-        "Built a Go REST API (JWT auth, CRUD, sync endpoint) backed by PostgreSQL (Neon); deployed on Railway with Docker; React dashboard on Vercel with custom domain and CORS.",
-        "Implemented libcurl sync client in the daemon, credential persistence for launchd, and GitHub Actions CI (Go tests, web build, C++/Linux + macOS).",
+        "Shipped an offline-first reminder daemon in C++17 (Unix-socket IPC, libcurl sync, last-write-wins + tombstones) with a Go/Postgres API and React dashboard at remindr.gfedolfi.dev.",
+        "Added JWT auth, Docker deploy on Railway, and GitHub Actions for Go tests, web build, and C++ on Linux + macOS.",
       ],
     },
     {
-      title: "TermiTama",
-      tags: "C++17, CMake, FTXUI, JSON",
-      period: "April 2026",
+      title: "SolverRL",
+      tags: "C++17, pybind11, Python, SWI-Prolog, CMake, GoogleTest",
+      period: "August 2026",
       bullets: [
-        "Built a terminal virtual pet game in C++17 using FTXUI with an FSM-driven lifecycle (Baby → Adult), four stat systems with offline time-delta decay capped at 12 hours, and a genetics engine with heritable stat caps and ±10% random mutation across breeding generations.",
-        "Implemented a persistent save system using JSON serialization that auto-saves after every action, restores full game state on launch, and supports a Pet Box of up to 6 simultaneously active pets with free switching and adoption.",
+        "Reproduced a 2026 paper: distill a PPO policy into a Prolog decision list, then only accept program edits that raise exact discounted return on a finite KeyDoor MDP.",
+        "C++17 core (FOIL-style induction, Bellman solve, EXPAND loop) with pybind11, GoogleTest/pytest CI, and a one-command pipeline from checkpoint to metrics.",
+      ],
+    },
+    {
+      title: "CVE Triage Agent",
+      tags: "Python, Anthropic API",
+      period: "July 2026",
+      bullets: [
+        "Built a Python agent that looks up dependency CVEs, checks whether the vulnerable code path is actually reachable, and writes a severity report with evidence.",
       ],
     },
   ],

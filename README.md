@@ -15,7 +15,8 @@ Deep links: [About.txt](https://gfedolfi.dev#about) · [Projects](https://gfedol
 - Draggable, resizable windows with Win95 minimize / maximize / close
 - Window layering and minimize/restore via the taskbar
 - Right-click context menu
-- Games folder: Minesweeper, Snake, and Connect Four
+- Games (Start menu): Minesweeper, Snake, and Connect Four
+- First visit skips the boot splash (add `?boot=1` or Start → Restart to see it)
 - Hash routes so you can share a specific app (`#resume`, `#projects`, …)
 
 **Mobile (<768px)**
@@ -28,7 +29,7 @@ Deep links: [About.txt](https://gfedolfi.dev#about) · [Projects](https://gfedol
 | Notepad (About.txt) | Bio, skills, and current focus |
 | Resume.pdf | Inline resume viewer with download |
 | Projects | Project cards with links |
-| Inbox | Message form, copy-email, and links |
+| Inbox | Copy email; Formspree send if `VITE_FORMSPREE_ENDPOINT` is set |
 | Books | Currently reading and a top 10 |
 | MS-DOS Prompt | Interactive prompt with custom commands |
 | My Computer | File-browser-style explorer |
@@ -57,7 +58,7 @@ npm run preview   # preview the production build locally
 npm run lint      # ESLint
 ```
 
-The first visit plays a short boot splash (Skip, Enter, or Escape). Later visits skip it. A hash in the URL also skips the boot and opens that app.
+The first visit plays a short boot splash only when the URL has `?boot=1` (or via Start → Restart). A hash in the URL also skips the boot and opens that app. Otherwise Resume.pdf and Projects open on the desktop.
 
 ---
 
@@ -71,7 +72,15 @@ src/data/portfolio.js
 
 Edit that file to make the portfolio your own — no other files need to change for content updates.
 
-Books data comes from Supabase. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in `.env` (and in GitHub Actions secrets for deploy).
+Books data comes from Supabase. Inbox send uses Formspree. Copy `.env.example` to `.env` and set:
+
+```
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+VITE_FORMSPREE_ENDPOINT=
+```
+
+Also add those as GitHub Actions secrets for deploy. If `VITE_FORMSPREE_ENDPOINT` is empty, Inbox only offers Copy email.
 
 ### Adding a new app
 

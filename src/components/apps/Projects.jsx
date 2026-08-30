@@ -1,5 +1,7 @@
 import { projects } from '../../data/portfolio';
 
+const featured = projects.filter(p => p.featured);
+
 function ProjectCard({ project }) {
   return (
     <div className="project-card">
@@ -39,10 +41,13 @@ function ProjectCard({ project }) {
         {project.description}
       </p>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', alignItems: 'center' }}>
         {project.tags.map(tag => (
           <span key={tag} className="project-tag">{tag}</span>
         ))}
+        <span style={{ marginLeft: 'auto', color: '#666', fontSize: '11px' }}>
+          {project.demo ? 'Live demo' : 'GitHub only'}
+        </span>
       </div>
     </div>
   );
@@ -64,15 +69,16 @@ export default function Projects() {
           gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))',
           gap: '10px',
         }}>
-          {projects.map(project => (
+          {featured.map(project => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
 
       <div className="win95-statusbar" style={{ flexShrink: 0 }}>
-        <span className="win95-statusbar-panel">{projects.length} object(s)</span>
+        <span className="win95-statusbar-panel">{featured.length} object(s)</span>
       </div>
     </div>
   );
 }
+
