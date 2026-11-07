@@ -14,8 +14,8 @@ export const person = {
 
 export const bio = `Hi, I'm Giancarlo.
 
-Senior at Wesleyan (CS & German, May 2027). SWE intern at
-turingpoint in Hamburg. I build systems in C++ and Go —
+Senior at Wesleyan (CS & German, May 2027). Former SWE intern
+at turingpoint in Hamburg (fall 2025). I build systems in C++ and Go —
 shipped Remindr (offline-first daemon + API + web app) and
 a CVE triage tool used by non-engineers.
 

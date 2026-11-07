@@ -26,7 +26,7 @@ function BookCard({ book, rank }) {
         <div className="book-card-meta">
           {book.genre && <span className="project-tag">{book.genre}</span>}
           {book.pages != null && (
-            <span style={{ fontSize: 'var(--text-xs)', color: '#444' }}>
+            <span className="cv-muted">
               {book.pages} pages
             </span>
           )}
@@ -94,14 +94,14 @@ function LoadingGrid() {
 function EmptyTab({ tab }) {
   if (tab === 'reading') {
     return (
-      <p style={{ margin: 0, color: '#444' }}>
+      <p className="cv-muted">
         Nothing on the shelf right now.
       </p>
     );
   }
 
   return (
-    <p style={{ margin: 0, color: '#444' }}>
+    <p className="cv-muted">
       No ranked favorites yet.
     </p>
   );
@@ -150,7 +150,7 @@ export default function Books() {
   const visibleBooks = activeTab === 'reading' ? readingBooks : top10Books;
 
   return (
-    <div className="win95-app" style={{ height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--color-surface)' }}>
+    <div className="books">
       <div className="books-tabs" role="tablist">
         {TABS.map(tab => {
           const isActive = activeTab === tab.id;
@@ -169,24 +169,17 @@ export default function Books() {
         })}
       </div>
 
-      <div
-        className="os-scrollbar win95-content"
-        style={{
-          flex: 1, overflow: 'auto', padding: '10px',
-          background: '#fff', margin: '0 4px 4px',
-          boxShadow: 'inset 1px 1px 0 #808080, inset -1px -1px 0 #fff, inset 2px 2px 0 #000, inset -2px -2px 0 #dfdfdf',
-        }}
-      >
+      <div className="books-body" role="tabpanel" aria-busy={loading}>
         {loading && <LoadingGrid />}
 
         {!loading && error && (
-          <div style={{ padding: '12px', background: '#ffffe0', border: '1px solid #808080' }}>
-            <strong>Could not load books</strong>
-            <p style={{ margin: '8px 0 0', color: '#222' }}>
+          <div className="books-error" role="alert">
+            <strong>Couldn't load the book list</strong>
+            <p>
               {import.meta.env.DEV ? error : 'Try again later.'}
             </p>
             {!isBooksConfigured() && import.meta.env.DEV && (
-              <p style={{ margin: '8px 0 0', color: '#444', fontSize: 'var(--text-xs)' }}>
+              <p className="cv-muted">
                 Create a <code>.env</code> file with <code>VITE_SUPABASE_URL</code> and{' '}
                 <code>VITE_SUPABASE_ANON_KEY</code>, then restart the dev server.
               </p>
@@ -203,11 +196,6 @@ export default function Books() {
         )}
       </div>
 
-      <div className="win95-statusbar" style={{ flexShrink: 0 }}>
-        <span className="win95-statusbar-panel">
-          {loading ? 'Reading shelf...' : `${visibleBooks.length} object(s)`}
-        </span>
-      </div>
     </div>
   );
 }

@@ -1,41 +1,37 @@
 # Portfolio OS
 
-A personal portfolio that looks and feels like a Windows 95 desktop. Built with React, Vite, and CSS — draggable windows, a working terminal, built-in games, and a recruiter-first mobile layout.
+A personal portfolio built as a German office shelf: every project, the resume, and the inbox is a labelled Leitz Ordner. Pull one off the shelf and it opens on the desk as a cover-and-page spread. Built with React and Vite. Alles ist eine Datei.
 
 **Live site:** [gfedolfi.dev](https://gfedolfi.dev)
 
-Deep links: [About.txt](https://gfedolfi.dev#about) · [Projects](https://gfedolfi.dev#projects) · [Resume.pdf](https://gfedolfi.dev#resume) · [Inbox](https://gfedolfi.dev#inbox)
+Deep links: [Remindr](https://gfedolfi.dev#remindr) · [Resume](https://gfedolfi.dev#resume) · [About](https://gfedolfi.dev#about) · [Contact](https://gfedolfi.dev#contact)
 
 ---
 
 ## Features
 
-**Desktop (≥768px)**
-- Click desktop icons (or Start) to open apps
-- Draggable, resizable windows with Win95 minimize / maximize / close
-- Window layering and minimize/restore via the taskbar
-- Right-click context menu
-- Games (Start menu): Minesweeper, Snake, and Connect Four
-- First visit skips the boot splash (add `?boot=1` or Start → Restart to see it)
-- Hash routes so you can share a specific app (`#resume`, `#projects`, …)
+**Wide screens (≥1100px)**
+- Shelf on the left, desk on the right; Remindr is open on first load
+- Pulling an Ordner slides its neighbours together; nothing overlaps
+- Register tabs on each cover jump between sections (`#resume/skills`)
+- Arrow keys walk the shelf, Enter opens; status tabs (LIVE, REPO, CV…) show before opening
 
-**Mobile (<768px)**
-- Pinned tabs: Projects, Resume, Inbox
-- Start menu for Notepad, Books, MS-DOS Prompt, My Computer, and games
+**Narrow screens**
+- The shelf becomes a list; opening an Ordner shows it full-screen with a "← Regal" back button
 
-**Apps**
-| App | Description |
+**Ordner**
+| Ordner | Description |
 |-----|-------------|
-| Notepad (About.txt) | Bio, skills, and current focus |
-| Resume.pdf | Inline resume viewer with download |
-| Projects | Project cards with links |
-| Inbox | Copy email; Formspree send if `VITE_FORMSPREE_ENDPOINT` is set |
-| Books | Currently reading and a top 10 |
-| MS-DOS Prompt | Interactive prompt with custom commands |
-| My Computer | File-browser-style explorer |
-| Minesweeper | Fully playable Minesweeper |
-| Snake | Keyboard-controlled Snake |
-| Connect Four | Play against a bot |
+| Remindr, SolverRL, CVE Triage Agent | One Ordner per featured project: overview, stack, links, what I built |
+| Weitere (More projects) | Non-featured projects |
+| Lebenslauf (Resume) | HTML resume from `portfolio.js`, plus PDF download |
+| Posteingang (Contact) | Email, links; Formspree form if `VITE_FORMSPREE_ENDPOINT` is set |
+| Über mich (About) | Bio |
+| Bücher (Books) | Currently reading and a top 10 (Supabase) |
+| Konsole (Terminal) | Shell with `ls`, `open <name>`, `help`… |
+| Spiele (Games) | Minesweeper, Snake, Vier gewinnt (Connect Four) |
+
+Old hashes (`#projects`, `#inbox`, `#notepad`, `#snake`…) still resolve.
 
 ---
 
@@ -43,8 +39,8 @@ Deep links: [About.txt](https://gfedolfi.dev#about) · [Projects](https://gfedol
 
 - **React 19** — UI and component state
 - **Vite** — dev server and build tool
-- **Tailwind CSS v3** — present, most chrome is custom Win95 CSS
-- **Framer Motion** — window mount presence
+- **CSS** — one stylesheet (`src/index.css`); Tailwind v3 is present but barely used
+- **Barlow Condensed + Public Sans** — self-hosted via Fontsource
 
 ---
 
@@ -58,7 +54,7 @@ npm run preview   # preview the production build locally
 npm run lint      # ESLint
 ```
 
-The first visit plays a short boot splash only when the URL has `?boot=1` (or via Start → Restart). A hash in the URL also skips the boot and opens that app. Otherwise Resume.pdf and Projects open on the desktop.
+A hash in the URL opens that Ordner (`#solverrl`, `#resume/education`). Otherwise Remindr opens on wide screens and the shelf shows on narrow ones.
 
 ---
 
@@ -82,12 +78,13 @@ VITE_FORMSPREE_ENDPOINT=
 
 Also add those as GitHub Actions secrets for deploy. If `VITE_FORMSPREE_ENDPOINT` is empty, Inbox only offers Copy email.
 
-### Adding a new app
+### Adding an Ordner
 
-1. Create `src/components/apps/MyApp.jsx`
-2. Add an entry to `WINDOW_CONFIGS` in `src/hooks/useWindowManager.js`
-3. Add it to `APP_COMPONENTS` in `src/components/Desktop.jsx` and `src/components/MobileLayout.jsx`
-4. Add the id to `APP_IDS` / `START_MENU_ITEMS` in `src/lib/apps.js`
+1. Add an entry to `SHELVES` in `src/lib/archive.js` (`id`, `kind`, German `label`, English `gloss`, `status`)
+2. Add its page to `KINDS` in `src/components/archive/Ordner.jsx` (pages live in `src/components/archive/files/`)
+3. If it has Register tabs, return them from `sectionsFor` in `src/lib/archive.js`
+
+Featured projects in `portfolio.js` get an Ordner automatically. `CURRENT_ORDNER` in `src/lib/archive.js` marks the one shown as in progress.
 
 ---
 
@@ -95,21 +92,19 @@ Also add those as GitHub Actions secrets for deploy. If `VITE_FORMSPREE_ENDPOINT
 
 ```
 src/
-├── App.jsx                  # Boot gate, then Desktop or MobileLayout
+├── App.jsx                     # Renders the archive
 ├── lib/
-│   └── apps.js              # App ids, hash routes, boot skip
+│   └── archive.js              # Shelf contents, hash routes, Register sections
 ├── data/
-│   └── portfolio.js         # All personal content lives here
-├── hooks/
-│   └── useWindowManager.js  # Window state (position, size, z-index, maximize)
+│   └── portfolio.js            # All personal content lives here
 └── components/
-    ├── Desktop.jsx           # Desktop layout, icons, wallpaper, context menu
-    ├── MobileLayout.jsx      # Mobile pinned tabs + Start menu
-    ├── Window.jsx            # Draggable/resizable window shell
-    ├── Taskbar.jsx           # Bottom taskbar
-    ├── StartCluster.jsx      # Start button + menu
-    ├── ContextMenu.jsx       # Right-click menu
-    └── apps/                 # Individual app panels
+    ├── archive/
+    │   ├── Archive.jsx         # Name band, shelf, desk; narrow/wide behaviour
+    │   ├── Shelf.jsx           # Spines with roving keyboard focus
+    │   ├── Ordner.jsx          # Cover (label, Register tabs) + page
+    │   ├── Stamp.jsx           # Rubber stamps and their ink filter
+    │   └── files/              # Page content per Ordner kind
+    └── apps/                   # Contact, Books, Terminal, games
 ```
 
 ---

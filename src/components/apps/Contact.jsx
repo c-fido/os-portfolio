@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { person } from '../../data/portfolio';
+import Stamp from '../archive/Stamp';
 
 const FORM_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || '';
+
+const FIELDS = [
+  { name: 'name', label: 'Name', gloss: 'Name', type: 'text', autoComplete: 'name', required: true },
+  { name: 'email', label: 'Von', gloss: 'Your email', type: 'email', autoComplete: 'email', required: true },
+  { name: 'subject', label: 'Betreff', gloss: 'Subject', type: 'text', autoComplete: 'off', required: false },
+];
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', body: '' });
@@ -23,10 +30,6 @@ export default function Contact() {
 
   const handleSend = async e => {
     e.preventDefault();
-    if (!canSend) {
-      await copyEmail();
-      return;
-    }
     setStatus('sending');
     try {
       const res = await fetch(FORM_ENDPOINT, {
@@ -43,92 +46,73 @@ export default function Contact() {
       if (!res.ok) throw new Error('send failed');
       setStatus('sent');
       setForm({ name: '', email: '', subject: '', body: '' });
-      setTimeout(() => setStatus('idle'), 4000);
     } catch {
       setStatus('error');
     }
   };
 
   return (
-    <div className="win95-app" style={{ height: '100%', display: 'flex', flexDirection: 'column', background: 'var(--color-surface)' }}>
-      <div className="win95-app-toolbar" style={{
-        display: 'flex', alignItems: 'center', gap: '6px',
-        padding: '3px 6px', borderBottom: '1px solid var(--color-border-dark)', flexShrink: 0,
-      }}>
-        {canSend && (
-          <button type="submit" form="inbox-form" className="win95-btn" style={{ minWidth: 'auto', padding: '3px 12px' }} disabled={status === 'sending'}>
-            Send
-          </button>
-        )}
-        <button type="button" className="win95-btn" style={{ minWidth: 'auto', padding: '3px 12px' }} onClick={copyEmail}>
-          {copied ? 'Copied' : 'Copy email'}
-        </button>
-      </div>
+    <>
+      <h2 className="page-title" data-ordner-heading tabIndex={-1}>Posteingang <span>Contact</span></h2>
 
-      <form id="inbox-form" onSubmit={handleSend} style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        <div style={{ background: 'var(--color-surface)', borderBottom: '2px solid var(--color-border-dark)', flexShrink: 0 }}>
-          {[
-            { label: 'To:', value: person.email, readOnly: true, name: '_to' },
-            { label: 'From:', placeholder: 'your@email.com', name: 'email' },
-            { label: 'Name:', placeholder: 'Your Name', name: 'name' },
-            { label: 'Subject:', placeholder: "What's on your mind?", name: 'subject' },
-          ].map(field => (
-            <div key={field.name} style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--color-border-dark)' }}>
-              <span style={{ width: '72px', padding: '0 10px', flexShrink: 0, fontWeight: 'bold', fontSize: 'var(--text-xs)' }}>
-                {field.label}
-              </span>
-              {field.readOnly ? (
-                <span style={{ flex: 1, padding: '5px 6px', color: '#333' }}>{field.value}</span>
-              ) : (
-                <input
-                  name={field.name}
-                  type={field.name === 'email' ? 'email' : 'text'}
-                  placeholder={field.placeholder}
-                  value={form[field.name]}
-                  onChange={handleChange}
-                  className="win95-input"
-                  style={{ flex: 1, margin: '3px 6px 3px 0' }}
-                  required={field.name === 'email' || field.name === 'name'}
-                />
-              )}
-            </div>
-          ))}
+      <section className="page-section">
+        <dl className="form-rows">
+          <dt>An <span>To</span></dt>
+          <dd><a href={`mailto:${person.email}?subject=${encodeURIComponent('gfedolfi.dev')}`}>{person.email}</a></dd>
+          <dt>GitHub</dt>
+          <dd><a href={person.github} target="_blank" rel="noopener noreferrer">{person.github.replace('https://', '')}</a></dd>
+          <dt>LinkedIn</dt>
+          <dd><a href={person.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn profile</a></dd>
+        </dl>
+        <div className="page-actions">
+          <a className="btn btn--primary" href={`mailto:${person.email}?subject=${encodeURIComponent('gfedolfi.dev')}`}>Write an email</a>
+          <button type="button" className="btn" onClick={copyEmail}>{copied ? 'Copied' : 'Copy email'}</button>
+          <span className="sr-only" role="status">{copied ? 'Email address copied' : ''}</span>
         </div>
+      </section>
 
-        <div style={{ flex: 1, padding: '6px', overflow: 'hidden' }}>
-          <textarea
-            name="body"
-            value={form.body}
-            onChange={handleChange}
-            placeholder={`Hi ${person.name},\n\nI'd love to chat about...`}
-            className="win95-input os-scrollbar text-prose"
-            style={{ width: '100%', height: '100%', resize: 'none', padding: '8px' }}
-            required={canSend}
-          />
-        </div>
-
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '6px 10px', borderTop: '1px solid var(--color-border-dark)', flexShrink: 0, gap: '8px', flexWrap: 'wrap',
-        }}>
-          <div style={{ display: 'flex', gap: '14px' }}>
-            <a href={person.github} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-title-active)' }}>GitHub</a>
-            <a href={person.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-title-active)' }}>LinkedIn</a>
-            <a href={`mailto:${person.email}?subject=${encodeURIComponent('gfedolfi.dev')}`} style={{ color: 'var(--color-title-active)' }}>Email</a>
-          </div>
+      {canSend && (
+        <section className="page-section">
+          <h3 className="section-title">Formular <span>Send a message here</span></h3>
           {status === 'sent' ? (
-            <span style={{ color: '#008000' }}>Sent. I will get back to you.</span>
-          ) : status === 'error' ? (
-            <span style={{ color: '#800000' }}>Send failed — copy email instead</span>
-          ) : status === 'sending' ? (
-            <span>Sending...</span>
-          ) : canSend ? (
-            <button type="submit" className="win95-btn">Send Message</button>
+            <div className="form-done" role="status">
+              <Stamp tone="blue">Erledigt</Stamp>
+              <p>Sent. I'll reply to the address you gave.</p>
+              <button type="button" className="btn btn--quiet" onClick={() => setStatus('idle')}>Write another</button>
+            </div>
           ) : (
-            <span style={{ color: '#666' }}>{copied ? 'Email copied' : 'Copy email to reach me'}</span>
+            <form className="formular" onSubmit={handleSend}>
+              {FIELDS.map(f => (
+                <label key={f.name} className="formular-field">
+                  <span className="formular-label">{f.label} <span>{f.gloss}{f.required ? '' : ' (optional)'}</span></span>
+                  <input
+                    name={f.name}
+                    type={f.type}
+                    autoComplete={f.autoComplete}
+                    value={form[f.name]}
+                    onChange={handleChange}
+                    required={f.required}
+                  />
+                </label>
+              ))}
+              <label className="formular-field">
+                <span className="formular-label">Nachricht <span>Message</span></span>
+                <textarea name="body" rows={6} value={form.body} onChange={handleChange} required />
+              </label>
+              <div className="page-actions">
+                <button type="submit" className="btn btn--primary" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </button>
+                {status === 'error' && (
+                  <p className="form-error" role="alert">
+                    Couldn't send. Email me directly at <a href={`mailto:${person.email}`}>{person.email}</a>; your text is still here.
+                  </p>
+                )}
+              </div>
+            </form>
           )}
-        </div>
-      </form>
-    </div>
+        </section>
+      )}
+    </>
   );
 }

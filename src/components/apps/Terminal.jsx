@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { person, skills, projects } from '../../data/portfolio';
+import { ALL_ORDNER } from '../../lib/archive';
 
-const PROMPT = `C:\\PORTFOLIO>`;
+const PROMPT = 'gast@akte:~$';
 const TERM_FONT = '13px';
 const SHELL_NAME = 'Portfolio Shell';
 const SHELL_VERSION = '1.00';
@@ -17,16 +18,18 @@ const BOOT_BANNER = [
 const COMMANDS = {
   help: () => `
 Available commands:
-  HELP          Show this help message
-  ABOUT         Who am I?
-  SKILLS        List my technical skills
-  PROJECTS      List projects
-  CONTACT       How to reach me
-  CLS           Clear the screen
-  WHOAMI        Print current user
-  DATE          Print current date
-  VER           System version
-  HIRE          Make me an offer!
+  help          Show this help message
+  ls            List the Ordner on the shelf
+  open <name>   Pull an Ordner onto the desk (e.g. open remindr)
+  about         Who am I?
+  skills        List my technical skills
+  projects      List projects
+  contact       How to reach me
+  clear         Clear the screen
+  whoami        Print current user
+  date          Print current date
+  ver           System version
+  hire          Make me an offer!
 
 Type any command and press Enter.
 `.trim(),
@@ -35,11 +38,11 @@ Type any command and press Enter.
 ${person.name} -- ${person.title}
 Location: ${person.location}
 
-SWE intern at turingpoint (Hamburg). I ship systems in C++ and Go —
+Former SWE intern at turingpoint (Hamburg). I ship systems in C++ and Go —
 Remindr is live at remindr.gfedolfi.dev. Also a research assistant in
 bioinformatics and additive manufacturing at Wesleyan.
 
-Type SKILLS, PROJECTS, or CONTACT for more info.
+Type skills, projects, or contact for more info.
 `.trim(),
 
   whoami: () => `${person.name.toLowerCase().replace(' ', '-')}`,
@@ -73,11 +76,11 @@ Contact ${person.name}:
   GitHub    ${person.github}
   Website   ${person.website}
 
-Or open Inbox from the desktop.
+Or run: open posteingang
 `.trim(),
 
   hire: () => `
-C:\\PORTFOLIO> HIRE ${person.name}
+$ hire ${person.name}
 
 Verifying credentials...
 Processing resume...
@@ -90,16 +93,33 @@ Contact: ${person.email}
 `.trim(),
 };
 
-function processCommand(input) {
-  const cmd = input.trim().toUpperCase();
-  if (!cmd) return null;
-  if (cmd === 'CLS') return 'CLEAR';
-  const handler = COMMANDS[cmd.toLowerCase()];
-  if (handler) return handler();
-  return `Bad command or file name: ${cmd}\nType HELP for available commands.`;
+const fold = (text) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+function listOrdner() {
+  return ALL_ORDNER.map(o => `  ${o.number}  ${o.id.padEnd(12)} ${o.label} (${o.gloss})`).join('\n');
 }
 
-export default function Terminal() {
+function processCommand(input, onOpenOrdner) {
+  const [name = '', ...args] = input.trim().split(/\s+/);
+  const cmd = name.toLowerCase();
+  if (!cmd) return null;
+  if (cmd === 'cls' || cmd === 'clear') return 'CLEAR';
+  if (cmd === 'ls' || cmd === 'dir') return listOrdner();
+  if (cmd === 'open' || cmd === 'cd') {
+    const query = fold(args.join(' '));
+    if (!query) return 'usage: open <name>   (run ls to see names)';
+    const match = ALL_ORDNER.find(o => [o.id, o.label, o.gloss].some(v => fold(v) === query))
+      || ALL_ORDNER.find(o => [o.id, o.label, o.gloss].some(v => fold(v).startsWith(query)));
+    if (!match) return `open: no Ordner called "${args.join(' ')}". Run ls to see names.`;
+    onOpenOrdner?.(match.id);
+    return `Pulling ${match.label} (${match.gloss}) from the shelf…`;
+  }
+  const handler = COMMANDS[cmd];
+  if (handler) return handler();
+  return `${cmd}: command not found\nType help for available commands.`;
+}
+
+export default function Terminal({ onOpenOrdner }) {
   const [history, setHistory] = useState([
     {
       type: 'system',
@@ -113,18 +133,20 @@ export default function Terminal() {
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
-  const bottomRef = useRef(null);
+  const outputRef = useRef(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'auto' });
+    // Scroll only the terminal output, never the page around it.
+    const el = outputRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [history]);
 
   const submit = useCallback(() => {
     const cmd = input.trim();
     if (!cmd) return;
 
-    const result = processCommand(cmd);
+    const result = processCommand(cmd, onOpenOrdner);
     setCmdHistory(h => [cmd, ...h]);
     setHistoryIdx(-1);
 
@@ -140,7 +162,7 @@ export default function Terminal() {
       ...(result ? [{ type: 'output', text: result }] : []),
     ]);
     setInput('');
-  }, [input]);
+  }, [input, onOpenOrdner]);
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter') {
@@ -174,7 +196,7 @@ export default function Terminal() {
     >
       {/* Output area */}
       <div
-        className="os-scrollbar"
+        ref={outputRef}
         style={{ flex: 1, overflow: 'auto', padding: '8px', lineHeight: 1.9 }}
       >
         {history.map((entry, i) => (
@@ -198,7 +220,6 @@ export default function Terminal() {
             )}
           </div>
         ))}
-        <div ref={bottomRef} />
       </div>
 
       {/* Input line */}
@@ -229,8 +250,8 @@ export default function Terminal() {
             caret: 'block',
             caretColor: '#c0c0c0',
           }}
+          aria-label="Terminal command"
           placeholder=""
-          autoFocus
           spellCheck={false}
           autoComplete="off"
           autoCorrect="off"

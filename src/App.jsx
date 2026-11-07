@@ -1,36 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
-import BootScreen from './components/BootScreen';
-import Desktop from './components/Desktop';
-import MobileLayout from './components/MobileLayout';
-import { markBooted, shouldSkipBoot } from './lib/apps';
-
-function useIsMobile() {
-  const [mobile, setMobile] = useState(() => window.innerWidth < 768);
-  useEffect(() => {
-    const handler = () => setMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handler);
-    return () => window.removeEventListener('resize', handler);
-  }, []);
-  return mobile;
-}
+import Archive from './components/archive/Archive';
 
 export default function App() {
-  const [booted, setBooted] = useState(() => shouldSkipBoot());
-  const isMobile = useIsMobile();
-  const handleBootComplete = useCallback(() => {
-    markBooted();
-    setBooted(true);
-  }, []);
-  const handleRestart = useCallback(() => {
-    setBooted(false);
-  }, []);
-
-  return (
-    <>
-      {!booted && <BootScreen onComplete={handleBootComplete} />}
-      {booted && (isMobile
-        ? <MobileLayout onRestart={handleRestart} />
-        : <Desktop onRestart={handleRestart} />)}
-    </>
-  );
+  return <Archive />;
 }

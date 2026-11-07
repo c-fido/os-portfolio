@@ -310,7 +310,7 @@ export default function ConnectFour() {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderTop: '1px solid #808080', flexShrink: 0 }}>
-        <button className="win95-btn" onClick={resetGame}>New Game</button>
+        <button className="btn" onClick={resetGame}>New Game</button>
       </div>
     </div>
   );

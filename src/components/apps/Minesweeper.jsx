@@ -183,7 +183,7 @@ export default function Minesweeper() {
             <span style={{ color: status === 'won' ? '#008000' : '#cc0000' }}>
               {status === 'won' ? 'You Win!' : 'Game Over!'}
             </span>
-            <button className="win95-btn" onClick={reset} style={{ marginLeft: '12px', minWidth: 'auto', padding: '3px 12px' }}>
+            <button className="btn" onClick={reset} style={{ marginLeft: '12px', minWidth: 'auto', padding: '3px 12px' }}>
               Play Again
             </button>
           </div>
