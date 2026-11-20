@@ -44,10 +44,14 @@ export const skills = {
   tools: ["PostgreSQL", "Docker", "CMake", "Git", "GitHub Actions", "Vite", "Railway", "Vercel"],
 };
 
+// Personal bests, shown on the site only when filled in, e.g. { event: "800m", mark: "1:56.20" }.
+export const track = [];
+
 export const projects = [
   {
     id: 1,
     title: "Remindr",
+    short: "Offline-first daemon, Go API and a live web app",
     description: "Offline-first reminder daemon in C++17 (Unix sockets, background sync) with a Go API on Postgres and a React dashboard. Live at remindr.gfedolfi.dev.",
     tags: ["C++17", "Go", "React", "PostgreSQL"],
     github: "https://github.com/c-fido/Remindr",
@@ -57,6 +61,7 @@ export const projects = [
   {
     id: 2,
     title: "SolverRL",
+    short: "Paper reproduction: PPO policy → Prolog program",
     description: "C++/Python reproduction of a paper that turns a PPO policy into an executable Prolog program, then only keeps edits that raise exact return. Tests and one-command pipeline on GitHub.",
     tags: ["C++17", "Python", "SWI-Prolog"],
     github: "https://github.com/c-fido/solverRL",
@@ -66,6 +71,7 @@ export const projects = [
   {
     id: 3,
     title: "CVE Triage Agent",
+    short: "Checks if vulnerable code is actually called",
     description: "Python agent that looks up dependency CVEs (OSV/NVD/GitHub), checks whether your code actually calls the vulnerable path, and writes a severity report. Not just CVSS copy-paste.",
     tags: ["Python", "Anthropic API"],
     github: "https://github.com/c-fido/cve-triage-agent",
@@ -75,6 +81,7 @@ export const projects = [
   {
     id: 4,
     title: "TermiTama",
+    short: "Terminal Tamagotchi in C++17",
     description: "Terminal Tamagotchi in C++17 / FTXUI: lifecycle FSM, offline stat decay, breeding, JSON save.",
     tags: ["C++17", "FTXUI", "CMake"],
     github: "https://github.com/c-fido/termitama",
@@ -83,8 +90,9 @@ export const projects = [
   },
   {
     id: 5,
-    title: "Portfolio OS",
-    description: "This site: Win95-style desktop in React.",
+    title: "This site",
+    short: "One React page with a live book list",
+    description: "gfedolfi.dev itself: one React page, hash deep links, a live book list from Supabase. No UI library.",
     tags: ["React", "Vite", "JavaScript"],
     github: "https://github.com/c-fido/os-portfolio",
     demo: "https://gfedolfi.dev",

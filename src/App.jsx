@@ -1,5 +1,5 @@
-import Archive from './components/archive/Archive';
+import Site from './components/site/Site';
 
 export default function App() {
-  return <Archive />;
+  return <Site />;
 }

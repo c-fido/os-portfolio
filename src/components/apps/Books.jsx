@@ -151,23 +151,25 @@ export default function Books() {
 
   return (
     <div className="books">
-      <div className="books-tabs" role="tablist">
-        {TABS.map(tab => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`books-tab${isActive ? ' books-tab--active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              {tab.label}
-            </button>
-          );
-        })}
-      </div>
+      {!error && (
+        <div className="books-tabs" role="tablist">
+          {TABS.map(tab => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                className={`books-tab${isActive ? ' books-tab--active' : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div className="books-body" role="tabpanel" aria-busy={loading}>
         {loading && <LoadingGrid />}

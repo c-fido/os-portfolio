@@ -55,9 +55,9 @@ export function getBookUrl(book) {
   return null;
 }
 
-export async function fetchBooks({ force = false } = {}) {
-  if (!force && booksCache) return booksCache;
-  if (!force && booksInflight) return booksInflight;
+export async function fetchBooks() {
+  if (booksCache) return booksCache;
+  if (booksInflight) return booksInflight;
 
   booksInflight = requestBooks()
     .then((data) => {

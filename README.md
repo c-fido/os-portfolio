@@ -39,7 +39,7 @@ Old hashes (`#projects`, `#inbox`, `#notepad`, `#snake`…) still resolve.
 
 - **React 19** — UI and component state
 - **Vite** — dev server and build tool
-- **CSS** — one stylesheet (`src/index.css`); Tailwind v3 is present but barely used
+- **CSS** — one stylesheet (`src/index.css`)
 - **Barlow Condensed + Public Sans** — self-hosted via Fontsource
 
 ---
